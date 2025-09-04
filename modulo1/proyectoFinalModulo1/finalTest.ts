@@ -1,5 +1,6 @@
 import { Professional } from './professional';
 import { Imdb } from './imdb';
+import * as readlineSync from 'readline-sync';
 
 const imdbInstance = new Imdb([]);
 const imdbLoaded = imdbInstance.obtenerInstanciaIMDB("imdbBBDD.json");
