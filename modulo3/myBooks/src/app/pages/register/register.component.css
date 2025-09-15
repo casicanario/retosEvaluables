@@ -1,0 +1,13 @@
+.register-container {
+  display: flex;
+  justify-content: center;   /* centra horizontal */
+  align-items: center;       /* centra vertical */
+  min-height: 80vh;          /* ocupa casi toda la pantalla */
+  background-color: #f9f9f9; /* color suave de fondo opcional */
+  padding: 2rem;
+}
+
+app-form-register {
+  width: 100%;
+  max-width: 400px;          /* límite de ancho */
+}

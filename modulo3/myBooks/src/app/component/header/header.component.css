@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007BFF; /* azul */
+  color: #fff;
+  padding: 1rem 2rem;
+  width: 100%; /* ocupa todo el ancho */
+  box-sizing: border-box; /* incluye padding en el ancho total */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-left: 1.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
