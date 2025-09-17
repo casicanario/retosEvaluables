@@ -1,10 +1,17 @@
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* ocupa toda la altura de la ventana */
+/* src/app/app.component.css */
+.main-content {
+  margin-top: 70px; /* Espacio para el header fijo */
+  min-height: calc(100vh - 70px);
 }
 
-.content {
-  flex: 1; /* crece para empujar el footer abajo */
-  background-color: #ffffff; /* opcional: para ver claramente el contenido */
+/* Estilos globales para el proyecto */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
 }
