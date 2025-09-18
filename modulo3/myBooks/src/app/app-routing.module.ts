@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,19 +14,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '/home' }
 ];
-=======
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [];
->>>>>>> origin/main
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-<<<<<<< HEAD
 export class AppRoutingModule { }
-=======
-export class AppRoutingModule { }
->>>>>>> origin/main
