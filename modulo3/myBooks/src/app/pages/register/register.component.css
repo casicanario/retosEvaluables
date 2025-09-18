@@ -1,42 +1,13 @@
-.register-section {
-  padding: 4rem 0;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  min-height: calc(100vh - 200px);
+.register-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: center;   /* centra horizontal */
+  align-items: center;       /* centra vertical */
+  min-height: 80vh;          /* ocupa casi toda la pantalla */
+  background-color: #f9f9f9; /* color suave de fondo opcional */
+  padding: 2rem;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.register-section h1 {
-  text-align: center;
-  color: #2c5f2d;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
-  font-weight: 300;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.register-section h1::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(135deg, #2c5f2d, #4a9a4d);
-  border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-  .register-section h1 {
-    font-size: 2.2rem;
-  }
+app-form-register {
+  width: 100%;
+  max-width: 400px;          /* límite de ancho */
 }

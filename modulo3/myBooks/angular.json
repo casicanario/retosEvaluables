@@ -3,11 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-<<<<<<< HEAD
-    "Mybooks": {
-=======
     "myBooks": {
->>>>>>> origin/main
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,11 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-<<<<<<< HEAD
-            "outputPath": "dist/mybooks",
-=======
             "outputPath": "dist/my-books",
->>>>>>> origin/main
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,17 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-<<<<<<< HEAD
-              "browserTarget": "Mybooks:build:production"
-            },
-            "development": {
-              "browserTarget": "Mybooks:build:development"
-=======
               "browserTarget": "myBooks:build:production"
             },
             "development": {
               "browserTarget": "myBooks:build:development"
->>>>>>> origin/main
             }
           },
           "defaultConfiguration": "development"
@@ -86,11 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-<<<<<<< HEAD
-            "browserTarget": "Mybooks:build"
-=======
             "browserTarget": "myBooks:build"
->>>>>>> origin/main
           }
         },
         "test": {
@@ -113,11 +94,8 @@
         }
       }
     }
-<<<<<<< HEAD
   },
   "cli": {
-    "analytics": "b939760a-231a-4e65-a0cd-e4229f8fc45d"
-=======
->>>>>>> origin/main
+    "analytics": "4c3e1015-2557-43b4-abbd-8ba173795235"
   }
 }

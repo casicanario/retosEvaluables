@@ -1,22 +1,17 @@
-<!-- src/app/components/header/header.component.html -->
-<header class="header">
-  <div class="container">
-    <div class="logo">
-      <h1 (click)="navigateToHome()">MyBooks</h1>
-    </div>
-    
-    <nav class="nav-menu" [class.active]="isMenuOpen">
-      <ul>
-        <li><a (click)="navigateToHome()" class="nav-link">Inicio</a></li>
-        <li><a (click)="navigateToBooks()" class="nav-link">Libros</a></li>
-        <li><a (click)="navigateToProfile()" class="nav-link">Profile</a></li>
-      </ul>
-    </nav>
-    
-    <div class="menu-toggle" (click)="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
+
+
+ <header>
+   
+  <div class="logo">MyBooks</div>
+  <nav>
+    <ul>
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="register">Register</a></li>
+    </ul>
+  </nav>
 </header>
+
+
+
+
+
