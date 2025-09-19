@@ -1,0 +1,16 @@
+<!-- src/app/components/book-card/book-card.component.html -->
+<div class="book-card">
+  <div class="book-image" *ngIf="book.photo">
+    <img [src]="book.photo" [alt]="book.title" />
+  </div>
+  <div class="book-info">
+    <h3>{{ book.title }}</h3>
+    <p><strong>Autor:</strong> {{ book.author }}</p>
+    <p><strong>Tipo:</strong> {{ book.type }}</p>
+    <p><strong>Precio:</strong> ${{ book.price }}</p>
+    <div class="book-ids">
+      <span class="book-id">ID: {{ book.id_book }}</span>
+      <span class="user-id">Usuario: {{ book.id_user }}</span>
+    </div>
+  </div>
+</div>

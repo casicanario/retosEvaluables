@@ -1,1 +1,56 @@
-<p>books works!</p>
+<div class="books-container">
+  <div class="books-header">
+    <h1>📚 Mi Biblioteca</h1>
+    <p>Gestiona tu colección de libros</p>
+  </div>
+
+  <!-- Mostrar información de la clase Book -->
+  <div class="book-model-info">
+    <h2>📖 Modelo Book</h2>
+    <div class="model-attributes">
+      <div class="attribute"><span class="attr-name">id_book:</span> <span class="attr-type">number</span></div>
+      <div class="attribute"><span class="attr-name">id_user:</span> <span class="attr-type">number</span></div>
+      <div class="attribute"><span class="attr-name">title:</span> <span class="attr-type">string</span></div>
+      <div class="attribute"><span class="attr-name">type:</span> <span class="attr-type">string</span></div>
+      <div class="attribute"><span class="attr-name">author:</span> <span class="attr-type">string</span></div>
+      <div class="attribute"><span class="attr-name">price:</span> <span class="attr-type">number</span></div>
+      <div class="attribute"><span class="attr-name">photo:</span> <span class="attr-type">string</span></div>
+    </div>
+  </div>
+
+  <!-- Lista de libros -->
+  <div class="books-grid">
+    <div class="book-card" *ngFor="let book of books">
+      <div class="book-image">
+        <img [src]="book.photo" [alt]="book.title" />
+      </div>
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="book-author">por {{ book.author }}</p>
+        <p class="book-type">{{ book.type }}</p>
+        <p class="book-price">${{ book.price }}</p>
+        <div class="book-ids">
+          <span class="book-id">ID Libro: {{ book.id_book }}</span>
+          <span class="user-id">ID Usuario: {{ book.id_user }}</span>
+        </div>
+        <button class="delete-btn" (click)="deleteBook(book.id_book)">
+          🗑️ Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Formulario para añadir libro -->
+  <app-add-book-form (bookAdded)="onBookAdded($event)"></app-add-book-form>
+
+    <!-- Mensaje cuando no hay libros -->
+    <div class="no-books" *ngIf="books.length === 0">
+      <p>📚 No hay libros en tu colección. ¡Agrega algunos!</p>
+      
+       <!-- Mostrar las cards de libros -->
+  <div class="books-grid" *ngIf="books.length > 0">
+    <app-book-card 
+      *ngFor="let book of books; trackBy: trackByBookId" 
+      [book]="book">
+    </app-book-card>
+  </div>
+</div>

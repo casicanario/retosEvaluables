@@ -11,6 +11,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BooksComponent } from './pages/books/books.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { AddBookFormComponent } from './components/add-book-form/add-book-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,15 @@ import { BooksComponent } from './pages/books/books.component';
     RegisterComponent,
     FormRegisterComponent,
     ProfileComponent,
-    BooksComponent
+    BooksComponent,
+    BookCardComponent,
+    AddBookFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
