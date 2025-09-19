@@ -1,6 +1,13 @@
-// src/app/components/profile/profile.component.ts
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+interface UserProfile {
+  name: string;
+  lastName: string;
+  email: string;
+  imageUrl: string;
+}
 
 @Component({
   selector: 'app-profile',
@@ -8,37 +15,59 @@ import { User } from '../../models/user.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: User = {
-    id_user: 1,
+  
+  userProfile: UserProfile = {
     name: 'Ruben',
-    last_name: 'Rivas Briceño',
-    email: 'uncorreo123@gmail.com',
-    photo: 'assets/images/profile-photo.jpg',
-    password: '123456'
-  };
-
-  isEditing = false;
-  editForm: User = { ...this.user };
-
-  constructor() { }
-
+    lastName: 'Rivas Briceño',
+    email: 'unicornio123@gmail.com',
+    imageUrl: 'myBooks/src/assets/profile-photo.jpg'
+  }
+  
+  profileForm: FormGroup;
+  
+  constructor(private formBuilder: FormBuilder) {
+    this.profileForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      imageUrl: ['', [Validators.required]]
+    });
+  }
+  
   ngOnInit(): void {
+    // Inicializar el formulario con los datos actuales del perfil
+    this.profileForm.patchValue({
+      name: this.userProfile.name,
+      lastName: this.userProfile.lastName,
+      email: this.userProfile.email,
+      imageUrl: this.userProfile.imageUrl
+    });
   }
-
-  onEditClick(): void {
-    console.log('Valor de user.name:', this.user.name);
-    this.isEditing = true;
-    this.editForm = { ...this.user };
-  }
-
-  onSaveClick(): void {
-    this.user = { ...this.editForm };
-    this.isEditing = false;
-    console.log('Usuario actualizado:', this.user);
-  }
-
-  onCancelClick(): void {
-    this.isEditing = false;
-    this.editForm = { ...this.user };
+  
+  onSubmit(): void {
+    if (this.profileForm.valid) {
+      // Actualizar los datos del perfil con los valores del formulario
+      this.userProfile = {
+        name: this.profileForm.get('name')?.value || '',
+        lastName: this.profileForm.get('lastName')?.value || '',
+        email: this.profileForm.get('email')?.value || '',
+        imageUrl: this.profileForm.get('imageUrl')?.value || ''
+      };
+      
+      console.log('Perfil actualizado:', this.userProfile);
+      
+      // Opcional: Mostrar mensaje de éxito
+      alert('¡Perfil actualizado correctamente!');
+      
+    } else {
+      console.log('Formulario inválido');
+      
+      // Marcar todos los campos como tocados para mostrar errores
+      Object.keys(this.profileForm.controls).forEach(key => {
+        this.profileForm.get(key)?.markAsTouched();
+      });
+      
+      alert('Por favor, completa todos los campos correctamente');
+    }
   }
 }
