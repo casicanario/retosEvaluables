@@ -37,11 +37,31 @@
 }
 
 .no-books p {
-  margin: 0;
+  margin: 0 0 20px 0;
   background: #f7fafc;
   padding: 30px;
   border-radius: 15px;
   border: 2px dashed #e2e8f0;
+}
+
+.add-book-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.add-book-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
 }
 
 @media (max-width: 768px) {

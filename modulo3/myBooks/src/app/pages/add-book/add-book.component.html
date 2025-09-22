@@ -1,0 +1,14 @@
+<div class="add-book-container">
+  <div class="add-book-hero">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Añadir libro</h1>
+      <p class="hero-subtitle">Agrega nuevos libros a tu colección</p>
+    </div>
+  </div>
+  
+  <div class="form-container">
+    <div class="form-card">
+      <app-add-book-form (bookAdded)="onBookAdded($event)"></app-add-book-form>
+    </div>
+  </div>
+</div>

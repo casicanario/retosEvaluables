@@ -1,11 +1,8 @@
 <div class="books-container">
   <div class="books-header">
     <h1>📚 Mi Biblioteca</h1>
-    <p>Gestiona tu colección de libros</p>
+    <p>Explora tu colección de libros</p>
   </div>
-
-  <!-- Formulario para añadir libro -->
-  <app-add-book-form (bookAdded)="onBookAdded($event)"></app-add-book-form>
 
   <!-- Lista de libros -->
   <div class="books-grid" *ngIf="books.length > 0">
@@ -19,5 +16,8 @@
   <!-- Mensaje cuando no hay libros -->
   <div class="no-books" *ngIf="books.length === 0">
     <p>📚 No hay libros en tu colección. ¡Agrega algunos!</p>
+    <button class="add-book-btn" routerLink="/add-book">
+      📚 Añadir primer libro
+    </button>
   </div>
 </div>

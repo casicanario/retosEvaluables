@@ -20,6 +20,17 @@ export class HeaderComponent {
     this.closeMenu();
   }
 
+  navigateToAddBook(): void {
+    this.router.navigate(['/add-book']);
+    this.closeMenu();
+  }
+
+  navigateToUpdateBook(): void {
+    // Por ahora redirige a books, se implementará UpdateBook más adelante
+    this.router.navigate(['/books']);
+    this.closeMenu();
+  }
+
   navigateToBooks(): void {
     this.router.navigate(['/books']);
     this.closeMenu();
