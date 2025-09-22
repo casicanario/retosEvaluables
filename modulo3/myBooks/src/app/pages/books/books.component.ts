@@ -3,7 +3,8 @@ import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'app-books',
-  templateUrl: './books.component.html'
+  templateUrl: './books.component.html',
+  styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
 

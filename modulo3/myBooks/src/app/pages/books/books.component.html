@@ -9,23 +9,11 @@
 
   <!-- Lista de libros -->
   <div class="books-grid" *ngIf="books.length > 0">
-    <div class="book-card" *ngFor="let book of books; trackBy: trackByBookId">
-      <div class="book-image">
-        <img [src]="book.photo" [alt]="book.title" />
-        <div class="book-tag">Tapa blanda</div>
-      </div>
-      <div class="book-info">
-        <h3 class="book-title">{{ book.title }}</h3>
-        <p class="book-author">Autor: {{ book.author }}</p>
-        <p class="book-ref">{{ book.id_book | bookReference }}</p>
-        <div class="book-price-section">
-          <span class="book-price">{{ book.price }}€</span>
-          <button class="buy-btn" [ngClass]="getButtonClass(book.price)">
-            Comprar
-          </button>
-        </div>
-      </div>
-    </div>
+    <app-card 
+      *ngFor="let book of books; trackBy: trackByBookId"
+      [book]="book"
+      (deleteBook)="deleteBook($event)">
+    </app-card>
   </div>
 
   <!-- Mensaje cuando no hay libros -->

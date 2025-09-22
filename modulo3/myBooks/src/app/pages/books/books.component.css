@@ -1,0 +1,59 @@
+.books-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.books-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.books-header h1 {
+  color: #2d3748;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.books-header p {
+  color: #718096;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.no-books {
+  text-align: center;
+  padding: 60px 20px;
+  color: #718096;
+  font-size: 1.2rem;
+}
+
+.no-books p {
+  margin: 0;
+  background: #f7fafc;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px dashed #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .books-header h1 {
+    font-size: 2rem;
+  }
+  
+  .books-container {
+    padding: 15px;
+  }
+}
