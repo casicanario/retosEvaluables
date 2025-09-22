@@ -3,8 +3,7 @@ import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'app-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css']
+  templateUrl: './books.component.html'
 })
 export class BooksComponent implements OnInit {
 
@@ -48,5 +47,16 @@ export class BooksComponent implements OnInit {
   // Método para el trackBy de ngFor
   trackByBookId(index: number, book: Book): number {
     return book.id_book || index;
+  }
+
+  // Método para obtener la clase CSS del botón según el precio
+  getButtonClass(price: number): string {
+    if (price < 15) {
+      return 'btn-green';
+    } else if (price < 25) {
+      return 'btn-blue';
+    } else {
+      return 'btn-teal';
+    }
   }
 }

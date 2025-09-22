@@ -2,25 +2,25 @@
   <!-- Caja 1: Mostrar datos del perfil -->
   <div class="profile-display-box">
     <div class="profile-info">
-      <img [src]="userProfile.imageUrl" [alt]="userProfile.name" class="profile-image">
-      <div class="profile-name-display">
+      <img [src]="user.photo" [alt]="user.name" class="profile-image">
+      <div class="profile-name-display" (click)="onUserNameClick()" style="cursor: pointer;">
         <i class="user-icon">👤</i>
-        <span>{{ userProfile.name }} {{ userProfile.lastName }}</span>
+        <span>{{ user.name }} {{ user.last_name }}</span>
       </div>
       
       <div class="profile-detail">
         <span class="label">Nombre</span>
-        <span class="value">{{ userProfile.name }}</span>
+        <span class="value">{{ user.name }}</span>
       </div>
       
       <div class="profile-detail">
         <span class="label">Apellido</span>
-        <span class="value">{{ userProfile.lastName }}</span>
+        <span class="value">{{ user.last_name }}</span>
       </div>
       
       <div class="profile-detail">
         <span class="label">Correo</span>
-        <span class="value">{{ userProfile.email }}</span>
+        <span class="value">{{ user.email }}</span>
       </div>
     </div>
   </div>

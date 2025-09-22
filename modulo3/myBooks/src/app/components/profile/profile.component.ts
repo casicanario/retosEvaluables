@@ -1,13 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-interface UserProfile {
-  name: string;
-  lastName: string;
-  email: string;
-  imageUrl: string;
-}
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -16,12 +10,14 @@ interface UserProfile {
 })
 export class ProfileComponent implements OnInit {
   
-  userProfile: UserProfile = {
-    name: 'Ruben',
-    lastName: 'Rivas Briceño',
-    email: 'unicornio123@gmail.com',
-    imageUrl: 'myBooks/src/assets/profile-photo.jpg'
-  }
+  user: User = new User(
+    1,
+    'Ruben',
+    'Rivas Briceño',
+    'unicornio123@gmail.com',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    'password123'
+  );
   
   profileForm: FormGroup;
   
@@ -37,24 +33,27 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     // Inicializar el formulario con los datos actuales del perfil
     this.profileForm.patchValue({
-      name: this.userProfile.name,
-      lastName: this.userProfile.lastName,
-      email: this.userProfile.email,
-      imageUrl: this.userProfile.imageUrl
+      name: this.user.name,
+      lastName: this.user.last_name,
+      email: this.user.email,
+      imageUrl: this.user.photo
     });
+  }
+  
+  // Método para el click del botón (Reto 5)
+  onUserNameClick(): void {
+    console.log('Nombre del usuario:', this.user.name);
   }
   
   onSubmit(): void {
     if (this.profileForm.valid) {
       // Actualizar los datos del perfil con los valores del formulario
-      this.userProfile = {
-        name: this.profileForm.get('name')?.value || '',
-        lastName: this.profileForm.get('lastName')?.value || '',
-        email: this.profileForm.get('email')?.value || '',
-        imageUrl: this.profileForm.get('imageUrl')?.value || ''
-      };
+      this.user.name = this.profileForm.get('name')?.value || '';
+      this.user.last_name = this.profileForm.get('lastName')?.value || '';
+      this.user.email = this.profileForm.get('email')?.value || '';
+      this.user.photo = this.profileForm.get('imageUrl')?.value || '';
       
-      console.log('Perfil actualizado:', this.userProfile);
+      console.log('Perfil actualizado:', this.user);
       
       // Opcional: Mostrar mensaje de éxito
       alert('¡Perfil actualizado correctamente!');

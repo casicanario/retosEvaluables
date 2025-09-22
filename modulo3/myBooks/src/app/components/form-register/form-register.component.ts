@@ -14,22 +14,8 @@ export class FormRegisterComponent {
       name: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
-    }, {
-      validators: this.passwordMatchValidator
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
-  }
-
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-    } else {
-      confirmPassword?.setErrors(null);
-    }
   }
 
   onSubmit() {
@@ -39,12 +25,14 @@ export class FormRegisterComponent {
       alert('Registro exitoso!');
       this.registerForm.reset();
     } else {
+      console.log('Formulario inválido');
       Object.keys(this.registerForm.controls).forEach(key => {
         const control = this.registerForm.get(key);
         if (control?.invalid) {
           control.markAsTouched();
         }
       });
+      alert('Por favor, completa todos los campos correctamente');
     }
   }
 }

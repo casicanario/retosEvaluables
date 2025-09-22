@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mybooks": {
+    "myBooks": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mybooks",
+            "outputPath": "dist/my-books",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,49 +60,42 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "mybooks:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "mybooks:build:production"
-            },
-            "development": {
-              "browserTarget": "mybooks:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "mybooks:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "myBooks:build"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "myBooks:build:production"
+    },
+    "development": {
+      "browserTarget": "myBooks:build:development"
+    }
+  }
+},
+      "test": {
+        "builder": "@angular-devkit/build-angular:karma",
+        "options": {
+          "polyfills": [
+            "zone.js",
+            "zone.js/testing"
+          ],
+          "tsConfig": "tsconfig.spec.json",
+          "assets": [
+            "src/favicon.ico",
+            "src/assets"
+          ],
+          "styles": [
+            "src/styles.css"
+          ],
+          "scripts": []
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
+  }
+},
+"cli": {
+    "analytics": "4c3e1015-2557-43b4-abbd-8ba173795235"
   }
 }

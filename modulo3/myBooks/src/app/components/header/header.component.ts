@@ -1,5 +1,4 @@
-// src/app/components/header/header.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,30 +6,40 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   isMenuOpen = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
+  ayud(): void {
+    console.log('MyBooks logo clicked');
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['/home']);
+    this.closeMenu();
+  }
+
+  navigateToBooks(): void {
+    this.router.navigate(['/books']);
+    this.closeMenu();
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/register']);
+    this.closeMenu();
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
+    this.closeMenu();
   }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  navigateToProfile(): void {
-    this.router.navigate(['/profile']);
-    this.isMenuOpen = false;
-  }
-
-  navigateToHome(): void {
-    this.router.navigate(['/']);
-    this.isMenuOpen = false;
-  }
-
-  navigateToBooks(): void {
-    this.router.navigate(['/books']);
+  private closeMenu(): void {
     this.isMenuOpen = false;
   }
 }
