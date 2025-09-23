@@ -2,12 +2,23 @@
   <div class="books-header">
     <h1>📚 Mi Biblioteca</h1>
     <p>Explora tu colección de libros</p>
+    
+    <!-- Buscador -->
+    <div class="search-container">
+      <input 
+        type="text" 
+        class="search-input"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        placeholder="🔍 Buscar por título, autor o género...">
+      <button class="clear-search" *ngIf="searchTerm" (click)="clearSearch()">✕</button>
+    </div>
   </div>
 
   <!-- Lista de libros -->
-  <div class="books-grid" *ngIf="books.length > 0">
+  <div class="books-grid" *ngIf="filteredBooks.length > 0">
     <app-card 
-      *ngFor="let book of books; trackBy: trackByBookId"
+      *ngFor="let book of filteredBooks; trackBy: trackByBookId"
       [book]="book"
       (deleteBook)="deleteBook($event)">
     </app-card>
@@ -18,6 +29,14 @@
     <p>📚 No hay libros en tu colección. ¡Agrega algunos!</p>
     <button class="add-book-btn" routerLink="/add-book">
       📚 Añadir primer libro
+    </button>
+  </div>
+
+  <!-- Mensaje cuando no hay resultados de búsqueda -->
+  <div class="no-results" *ngIf="books.length > 0 && filteredBooks.length === 0">
+    <p>🔍 No se encontraron libros que coincidan con "{{ searchTerm }}"</p>
+    <button class="clear-search-btn" (click)="clearSearch()">
+      Mostrar todos los libros
     </button>
   </div>
 </div>

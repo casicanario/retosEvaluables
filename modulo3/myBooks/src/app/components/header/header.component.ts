@@ -26,13 +26,18 @@ export class HeaderComponent {
   }
 
   navigateToUpdateBook(): void {
-    // Por ahora redirige a books, se implementará UpdateBook más adelante
+    // Redirigir a books ya que UpdateBook necesita seleccionar un libro
     this.router.navigate(['/books']);
     this.closeMenu();
   }
 
   navigateToBooks(): void {
     this.router.navigate(['/books']);
+    this.closeMenu();
+  }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
     this.closeMenu();
   }
 

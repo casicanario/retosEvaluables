@@ -40,8 +40,37 @@ export class BooksService {
     return this.books.filter(book => book.id_user === userId);
   }
 
+  // Método para obtener un libro por ID (requerido por reto)
+  getOne(id_libro: number): Book | undefined {
+    return this.books.find(book => book.id_book === id_libro);
+  }
+
   // Método auxiliar para obtener un libro por ID
   getById(id_book: number): Book | undefined {
     return this.books.find(book => book.id_book === id_book);
+  }
+
+  // Método para editar un libro (requerido por reto)
+  edit(book: Book): boolean {
+    const index = this.books.findIndex(b => b.id_book === book.id_book);
+    if (index !== -1) {
+      this.books[index] = { ...book };
+      return true;
+    }
+    return false;
+  }
+
+  // Método para buscar libros por título, autor o tipo
+  search(searchTerm: string): Book[] {
+    if (!searchTerm.trim()) {
+      return this.getAll();
+    }
+    
+    const term = searchTerm.toLowerCase();
+    return this.books.filter(book => 
+      book.title.toLowerCase().includes(term) ||
+      book.author.toLowerCase().includes(term) ||
+      book.type.toLowerCase().includes(term)
+    );
   }
 }

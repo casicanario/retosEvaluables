@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Book } from '../../models/book.model';
 
 @Component({
@@ -10,9 +11,16 @@ export class CardComponent {
   @Input() book!: Book;
   @Output() deleteBook = new EventEmitter<number>();
 
+  constructor(private router: Router) {}
+
   // Método para manejar el click del botón eliminar
   onDelete(): void {
     this.deleteBook.emit(this.book.id_book);
+  }
+
+  // Método para manejar el click del botón editar
+  onEdit(): void {
+    this.router.navigate(['/update-book', this.book.id_book]);
   }
 
   // Método para obtener la clase CSS del botón según el precio

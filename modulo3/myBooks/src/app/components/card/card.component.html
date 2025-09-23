@@ -1,5 +1,8 @@
 <div class="book-card">
-  <button class="delete-btn" (click)="onDelete()">×</button>
+  <div class="card-actions">
+    <button class="edit-btn" (click)="onEdit()" title="Editar libro">✏️</button>
+    <button class="delete-btn" (click)="onDelete()" title="Eliminar libro">×</button>
+  </div>
   <div class="book-image">
     <img [src]="book.photo" [alt]="book.title" />
     <div class="book-tag">Tapa blanda</div>

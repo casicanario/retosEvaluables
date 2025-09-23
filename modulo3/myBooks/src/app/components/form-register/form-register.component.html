@@ -1,39 +1,88 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  
+  <!-- Campo Nombre -->
   <div class="form-group">
     <input 
       type="text" 
       id="name" 
       formControlName="name" 
       placeholder="Nombre"
-      class="form-control">
+      class="form-control"
+      [class.invalid]="isFieldInvalid('name')">
+    <div class="error-message" *ngIf="isFieldInvalid('name')">
+      <span *ngIf="registerForm.get('name')?.errors?.['required']">⚠️ El nombre es obligatorio</span>
+      <span *ngIf="registerForm.get('name')?.errors?.['minlength']">⚠️ Mínimo 2 caracteres</span>
+    </div>
   </div>
 
+  <!-- Campo Apellido -->
   <div class="form-group">
     <input 
       type="text" 
       id="lastName" 
       formControlName="lastName" 
       placeholder="Apellido"
-      class="form-control">
+      class="form-control"
+      [class.invalid]="isFieldInvalid('lastName')">
+    <div class="error-message" *ngIf="isFieldInvalid('lastName')">
+      <span *ngIf="registerForm.get('lastName')?.errors?.['required']">⚠️ El apellido es obligatorio</span>
+      <span *ngIf="registerForm.get('lastName')?.errors?.['minlength']">⚠️ Mínimo 2 caracteres</span>
+    </div>
   </div>
 
+  <!-- Campo Email -->
   <div class="form-group">
     <input 
       type="email" 
       id="email" 
       formControlName="email" 
-      placeholder="Correo"
-      class="form-control">
+      placeholder="Correo electrónico"
+      class="form-control"
+      [class.invalid]="isFieldInvalid('email')">
+    <div class="error-message" *ngIf="isFieldInvalid('email')">
+      <span *ngIf="registerForm.get('email')?.errors?.['required']">⚠️ El email es obligatorio</span>
+      <span *ngIf="registerForm.get('email')?.errors?.['email']">⚠️ Email inválido</span>
+    </div>
   </div>
 
+  <!-- Campo Contraseña -->
   <div class="form-group">
     <input 
       type="password" 
       id="password" 
       formControlName="password" 
       placeholder="Contraseña"
-      class="form-control">
+      class="form-control"
+      [class.invalid]="isFieldInvalid('password')">
+    <div class="error-message" *ngIf="isFieldInvalid('password')">
+      <span *ngIf="registerForm.get('password')?.errors?.['required']">⚠️ La contraseña es obligatoria</span>
+      <span *ngIf="registerForm.get('password')?.errors?.['minlength']">⚠️ Mínimo 6 caracteres</span>
+    </div>
   </div>
 
-  <button type="submit" class="btn-register">Registrarse</button>
+  <!-- Campo Confirmar Contraseña -->
+  <div class="form-group">
+    <input 
+      type="password" 
+      id="confirmPassword" 
+      formControlName="confirmPassword" 
+      placeholder="Confirmar contraseña"
+      class="form-control"
+      [class.invalid]="isFieldInvalid('confirmPassword') || hasPasswordMismatch()">
+    <div class="error-message" *ngIf="isFieldInvalid('confirmPassword') || hasPasswordMismatch()">
+      <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">⚠️ Confirma tu contraseña</span>
+      <span *ngIf="hasPasswordMismatch()">⚠️ Las contraseñas no coinciden</span>
+    </div>
+  </div>
+
+  <!-- Botón Submit -->
+  <button 
+    type="submit" 
+    class="btn-register" 
+    [disabled]="registerForm.invalid || isLoading"
+    [class.loading]="isLoading">
+    <span *ngIf="!isLoading">Registrarse</span>
+    <span *ngIf="isLoading">Registrando...</span>
+  </button>
+  
 </form>
