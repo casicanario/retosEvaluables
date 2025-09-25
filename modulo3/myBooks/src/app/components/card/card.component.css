@@ -176,3 +176,22 @@
   background: linear-gradient(135deg, #319795, #2c7a7b);
   transform: translateY(-2px);
 }
+
+/* Estilos para la directiva card-color */
+.book-card.card-even {
+  transition: all 0.3s ease;
+}
+
+.book-card.card-odd {
+  transition: all 0.3s ease;
+}
+
+.book-card.card-even:hover {
+  background-color: #e6f3ff !important;
+  border-left-color: #0056b3 !important;
+}
+
+.book-card.card-odd:hover {
+  background-color: #ffe6e6 !important;
+  border-left-color: #b30000 !important;
+}

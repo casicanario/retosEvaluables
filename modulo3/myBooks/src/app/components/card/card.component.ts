@@ -9,6 +9,7 @@ import { Book } from '../../models/book.model';
 })
 export class CardComponent {
   @Input() book!: Book;
+  @Input() index: number = 0; // Índice para la directiva de colores
   @Output() deleteBook = new EventEmitter<number>();
 
   constructor(private router: Router) {}

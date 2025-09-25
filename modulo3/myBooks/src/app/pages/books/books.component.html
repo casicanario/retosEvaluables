@@ -18,8 +18,9 @@
   <!-- Lista de libros -->
   <div class="books-grid" *ngIf="filteredBooks.length > 0">
     <app-card 
-      *ngFor="let book of filteredBooks; trackBy: trackByBookId"
+      *ngFor="let book of filteredBooks; let i = index; trackBy: trackByBookId"
       [book]="book"
+      [index]="i"
       (deleteBook)="deleteBook($event)">
     </app-card>
   </div>
