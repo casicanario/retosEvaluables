@@ -21,6 +21,7 @@ import { AddBookComponent } from './pages/add-book/add-book.component';
 import { UpdateBookComponent } from './pages/update-book/update-book.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
+import { CardColorDirective } from './directives/card-color.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FormLoginComponent } from './components/form-login/form-login.component
     AddBookComponent,
     UpdateBookComponent,
     LoginComponent,
-    FormLoginComponent
+    FormLoginComponent,
+    CardColorDirective
   ],
   imports: [
     BrowserModule,

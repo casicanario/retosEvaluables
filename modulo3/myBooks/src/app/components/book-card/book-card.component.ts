@@ -9,4 +9,5 @@ import { Book } from '../../models/book.model';
 })
 export class BookCardComponent {
   @Input() book!: Book;
+  @Input() index: number = 0; // Índice para la directiva de colores
 }

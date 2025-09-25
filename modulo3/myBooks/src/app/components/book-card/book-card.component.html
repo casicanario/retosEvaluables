@@ -1,5 +1,5 @@
 <!-- src/app/components/book-card/book-card.component.html -->
-<div class="book-card">
+<div class="book-card" [appCardColor]="index">
   <div class="book-image" *ngIf="book.photo">
     <img [src]="book.photo" [alt]="book.title" />
   </div>
@@ -10,6 +10,7 @@
     <p><strong>Precio:</strong> ${{ book.price }}</p>
     <div class="book-ids">
       <span class="book-id">ID: {{ book.id_book }}</span>
+      <span class="book-reference">Referencia: {{ book.id_book | bookReference }}</span>
       <span class="user-id">Usuario: {{ book.id_user }}</span>
     </div>
   </div>
