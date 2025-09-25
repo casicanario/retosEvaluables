@@ -1,0 +1,10 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ocupa toda la altura de la ventana */
+}
+
+.content {
+  flex: 1; /* crece para empujar el footer abajo */
+  background-color: #ffffff; /* opcional: para ver claramente el contenido */
+}

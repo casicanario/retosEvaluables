@@ -1,0 +1,86 @@
+<!-- src/app/components/add-book-form/add-book-form.component.html -->
+<div class="form-container">
+  <h3>Añadir Nuevo Libro</h3>
+  
+  <form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)" class="book-form">
+    <div class="form-group">
+      <label for="title">Título *</label>
+      <input 
+        type="text" 
+        id="title" 
+        name="title"
+        [(ngModel)]="book.title"
+        required
+        #title="ngModel"
+        class="form-control">
+      <div *ngIf="title.invalid && title.touched" class="error-message">
+        El título es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="author">Autor *</label>
+      <input 
+        type="text" 
+        id="author" 
+        name="author"
+        [(ngModel)]="book.author"
+        required
+        #author="ngModel"
+        class="form-control">
+      <div *ngIf="author.invalid && author.touched" class="error-message">
+        El autor es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Tipo *</label>
+      <input 
+        type="text" 
+        id="type" 
+        name="type"
+        [(ngModel)]="book.type"
+        required
+        #type="ngModel"
+        class="form-control">
+      <div *ngIf="type.invalid && type.touched" class="error-message">
+        El tipo es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Precio *</label>
+      <input 
+        type="number" 
+        id="price" 
+        name="price"
+        [(ngModel)]="book.price"
+        required
+        min="0"
+        step="0.01"
+        #price="ngModel"
+        class="form-control">
+      <div *ngIf="price.invalid && price.touched" class="error-message">
+        El precio es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="photo">URL de la foto</label>
+      <input 
+        type="url" 
+        id="photo" 
+        name="photo"
+        [(ngModel)]="book.photo"
+        #photo="ngModel"
+        class="form-control">
+    </div>
+
+    <button 
+      type="submit" 
+      [disabled]="bookForm.invalid"
+      class="submit-btn">
+      Añadir Libro
+    </button>
+  </form>
+</div>

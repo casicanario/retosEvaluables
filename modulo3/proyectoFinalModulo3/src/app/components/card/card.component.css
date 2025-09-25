@@ -1,0 +1,197 @@
+.book-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.edit-btn, .delete-btn {
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.edit-btn {
+  background: #3498db;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #2980b9;
+  transform: scale(1.1);
+}
+
+.delete-btn {
+  background: #ff4757;
+  color: white;
+  font-size: 18px;
+}
+
+.delete-btn:hover {
+  background: #ff3742;
+  transform: scale(1.1);
+}
+
+.book-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.book-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover .book-image img {
+  transform: scale(1.05);
+}
+
+.book-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(16, 185, 129, 0.9);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.book-info {
+  padding: 20px;
+}
+
+.book-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-author {
+  color: #718096;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.book-ref {
+  color: #a0aec0;
+  font-size: 12px;
+  margin: 0 0 15px 0;
+  font-family: 'Courier New', monospace;
+  background: #f7fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.book-price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.book-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.buy-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-green {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+}
+
+.btn-green:hover {
+  background: linear-gradient(135deg, #38a169, #2f855a);
+  transform: translateY(-2px);
+}
+
+.btn-blue {
+  background: linear-gradient(135deg, #4299e1, #3182ce);
+  color: white;
+}
+
+.btn-blue:hover {
+  background: linear-gradient(135deg, #3182ce, #2c5aa0);
+  transform: translateY(-2px);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, #38b2ac, #319795);
+  color: white;
+}
+
+.btn-teal:hover {
+  background: linear-gradient(135deg, #319795, #2c7a7b);
+  transform: translateY(-2px);
+}
+
+/* Estilos para la directiva card-color */
+.book-card.card-even {
+  transition: all 0.3s ease;
+}
+
+.book-card.card-odd {
+  transition: all 0.3s ease;
+}
+
+.book-card.card-even:hover {
+  background-color: #e6f3ff !important;
+  border-left-color: #0056b3 !important;
+}
+
+.book-card.card-odd:hover {
+  background-color: #ffe6e6 !important;
+  border-left-color: #b30000 !important;
+}
