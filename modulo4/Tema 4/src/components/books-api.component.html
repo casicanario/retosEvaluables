@@ -1,0 +1,150 @@
+<div class="books-api-container">
+  <h2>📚 Gestión de Libros - API REST</h2>
+  
+  <!-- Mensaje de error -->
+  <div *ngIf="error" class="error-message" (click)="clearError()">
+    ❌ {{ error }}
+    <small>(Haz clic para cerrar)</small>
+  </div>
+  
+  <!-- Indicador de carga -->
+  <div *ngIf="loading" class="loading">
+    🔄 Cargando...
+  </div>
+  
+  <!-- Formulario para agregar libro -->
+  <div class="add-book-form">
+    <h3>➕ Agregar Nuevo Libro</h3>
+    <form (ngSubmit)="addBook()" #bookForm="ngForm">
+      <div class="form-row">
+        <input 
+          type="text" 
+          [(ngModel)]="newBook.title" 
+          name="title"
+          placeholder="Título"
+          required
+          class="form-input">
+        
+        <input 
+          type="text" 
+          [(ngModel)]="newBook.author" 
+          name="author"
+          placeholder="Autor"
+          required
+          class="form-input">
+      </div>
+      
+      <div class="form-row">
+        <input 
+          type="text" 
+          [(ngModel)]="newBook.genre" 
+          name="genre"
+          placeholder="Género"
+          required
+          class="form-input">
+        
+        <input 
+          type="number" 
+          [(ngModel)]="newBook.pages" 
+          name="pages"
+          placeholder="Páginas"
+          min="1"
+          required
+          class="form-input">
+      </div>
+      
+      <textarea 
+        [(ngModel)]="newBook.description" 
+        name="description"
+        placeholder="Descripción (opcional)"
+        class="form-textarea">
+      </textarea>
+      
+      <div class="form-buttons">
+        <button type="submit" [disabled]="!bookForm.form.valid || loading" class="btn-primary">
+          📖 Agregar Libro
+        </button>
+        <button type="button" (click)="resetForm()" class="btn-secondary">
+          🔄 Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Barra de búsqueda -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      #searchInput
+      placeholder="🔍 Buscar libros..."
+      (keyup.enter)="searchBooks(searchInput.value)"
+      class="search-input">
+    <button (click)="searchBooks(searchInput.value)" class="btn-search">
+      Buscar
+    </button>
+    <button (click)="loadBooks(); searchInput.value=''" class="btn-clear">
+      Mostrar Todos
+    </button>
+  </div>
+  
+  <!-- Lista de libros -->
+  <div class="books-grid">
+    <div *ngFor="let book of books; trackBy: trackByBookId" class="book-card">
+      <h4>{{ book.title }}</h4>
+      <p><strong>Autor:</strong> {{ book.author }}</p>
+      <p><strong>Género:</strong> {{ book.genre }}</p>
+      <p><strong>Páginas:</strong> {{ book.pages }}</p>
+      <p *ngIf="book.description" class="description">{{ book.description }}</p>
+      
+      <div class="book-actions">
+        <button 
+          (click)="getBookById(book.id_book!)" 
+          class="btn-info"
+          title="Ver detalles">
+          👁️ Ver
+        </button>
+        
+        <button 
+          (click)="editBookInline(book)" 
+          class="btn-edit"
+          title="Editar libro">
+          ✏️ Editar
+        </button>
+        
+        <button 
+          (click)="deleteBook(book.id_book!)" 
+          class="btn-delete"
+          title="Eliminar libro">
+          🗑️ Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mensaje cuando no hay libros -->
+  <div *ngIf="books.length === 0 && !loading" class="no-books">
+    📚 No hay libros disponibles. ¡Agrega el primero!
+  </div>
+  
+  <!-- Detalles del libro seleccionado -->
+  <div *ngIf="selectedBook" class="selected-book">
+    <h3>📖 Detalles del Libro</h3>
+    <div class="book-details">
+      <p><strong>ID:</strong> {{ selectedBook.id_book }}</p>
+      <p><strong>Título:</strong> {{ selectedBook.title }}</p>
+      <p><strong>Autor:</strong> {{ selectedBook.author }}</p>
+      <p><strong>Género:</strong> {{ selectedBook.genre }}</p>
+      <p><strong>Páginas:</strong> {{ selectedBook.pages }}</p>
+      <p *ngIf="selectedBook.description"><strong>Descripción:</strong> {{ selectedBook.description }}</p>
+    </div>
+    <button (click)="selectedBook = null" class="btn-close">❌ Cerrar</button>
+  </div>
+  
+  <!-- Información de la API -->
+  <div class="api-info">
+    <h3>🔧 Información de la API</h3>
+    <p><strong>Endpoint:</strong> http://localhost:3000/api/books</p>
+    <p><strong>Total de libros:</strong> {{ books.length }}</p>
+    <button (click)="loadBooks()" class="btn-refresh">🔄 Refrescar</button>
+  </div>
+</div>
