@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Pokédex - Buscador de Pokémon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">
+                <span class="pokeball">⚪</span>
+                Pokédex
+                <span class="subtitle">Buscador de Pokémon</span>
+            </h1>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="pokemonInput" 
+                    class="search-input" 
+                    placeholder="🔍 Escribe el nombre de un Pokémon... (ej: pikachu, charizard, ditto)"
+                    maxlength="50">
+                <button id="searchBtn" class="search-btn">
+                    <span class="btn-text">Buscar Pokémon</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            
+            <!-- Sugerencias -->
+            <div class="suggestions">
+                <p>💡 <strong>Sugerencias:</strong></p>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" data-pokemon="pikachu">Pikachu</button>
+                    <button class="suggestion-chip" data-pokemon="charizard">Charizard</button>
+                    <button class="suggestion-chip" data-pokemon="blastoise">Blastoise</button>
+                    <button class="suggestion-chip" data-pokemon="venusaur">Venusaur</button>
+                    <button class="suggestion-chip" data-pokemon="gengar">Gengar</button>
+                    <button class="suggestion-chip" data-pokemon="dragonite">Dragonite</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <div class="pokeball-spinner"></div>
+            <p>🔄 Buscando Pokémon...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message hidden">
+            <div class="error-content">
+                <span class="error-icon">❌</span>
+                <h3>¡Oops! Pokémon no encontrado</h3>
+                <p id="errorText">No se pudo encontrar el Pokémon solicitado. Verifica el nombre e inténtalo de nuevo.</p>
+                <button id="closeError" class="close-error-btn">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Pokemon Card -->
+        <section id="pokemonCard" class="pokemon-card hidden">
+            <div class="card-header">
+                <h2 id="pokemonName" class="pokemon-name">Nombre del Pokémon</h2>
+                <span id="pokemonId" class="pokemon-id">#001</span>
+            </div>
+            
+            <div class="card-content">
+                <!-- Pokemon Image -->
+                <div class="pokemon-image-container">
+                    <img id="pokemonImage" src="" alt="Imagen del Pokémon" class="pokemon-image">
+                    <div class="image-background"></div>
+                </div>
+                
+                <!-- Pokemon Info -->
+                <div class="pokemon-info">
+                    <!-- Basic Info -->
+                    <div class="info-section">
+                        <h3 class="section-title">📊 Información Básica</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Altura:</span>
+                                <span id="pokemonHeight" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Peso:</span>
+                                <span id="pokemonWeight" class="info-value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Experiencia Base:</span>
+                                <span id="pokemonExperience" class="info-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Types -->
+                    <div class="info-section">
+                        <h3 class="section-title">🏷️ Tipos</h3>
+                        <div id="pokemonTypes" class="types-container">
+                            <!-- Types will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Abilities -->
+                    <div class="info-section">
+                        <h3 class="section-title">⚡ Habilidades</h3>
+                        <div id="pokemonAbilities" class="abilities-container">
+                            <!-- Abilities will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="info-section">
+                        <h3 class="section-title">📈 Estadísticas</h3>
+                        <div id="pokemonStats" class="stats-container">
+                            <!-- Stats will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="card-actions">
+                <button id="searchAnother" class="action-btn primary">
+                    🔍 Buscar Otro Pokémon
+                </button>
+                <button id="randomPokemon" class="action-btn secondary">
+                    🎲 Pokémon Aleatorio
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                📱 Powered by <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokéAPI</a> 
+                | 💻 Consumo de API Externa
+            </p>
+            <p class="small-text">Módulo 4 - Tema 5 | Codenotch</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
