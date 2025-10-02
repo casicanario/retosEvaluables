@@ -1,0 +1,39 @@
+{
+  "name": "modulo5-tema2-consultas",
+  "version": "1.0.0",
+  "description": "API REST con Express para consultas avanzadas MySQL - Módulo 5 Tema 2",
+  "main": "consultas.js",
+  "type": "module",
+  "scripts": {
+    "start": "node consultas.js",
+    "demo": "node consultas-demo.js",
+    "dev": "nodemon consultas.js",
+    "dev-demo": "nodemon consultas-demo.js",
+    "test": "curl http://localhost:3000/status",
+    "test-all": "node test-endpoints.js"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "api",
+    "rest",
+    "consultas",
+    "codenotch",
+    "nodejs"
+  ],
+  "author": "Estudiante Codenotch",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "colors": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

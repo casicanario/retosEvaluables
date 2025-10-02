@@ -1,0 +1,22 @@
+🌐 USAR MYSQL ONLINE (MÁS FÁCIL)
+=====================================
+
+PASO 1: Ir a una base de datos online
+- Opción A: https://www.db4free.net/
+- Opción B: https://remotemysql.com/
+- Opción C: https://phpmyadmin.co/
+
+PASO 2: Crear cuenta gratis
+- Registrarse con email
+- Anotar los datos de conexión que te den
+
+PASO 3: Usar phpMyAdmin online
+- Entrar a phpMyAdmin
+- Pegar el contenido de crear_base_datos.sql
+- Ejecutar para crear la base de datos
+
+PASO 4: Hacer las capturas
+- Ejecutar cada consulta de consultas_workbench.sql
+- Capturar pantalla de cada resultado
+
+¿Prefieres esta opción o probamos algo aún más simple?
