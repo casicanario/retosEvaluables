@@ -1,0 +1,41 @@
+{
+  "name": "modulo5-tema1-mysql",
+  "version": "1.0.0",
+  "description": "Aplicación Node.js para ejecutar consultas SQL en MySQL - Módulo 5 Tema 1",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node test-connection.js",
+    "install-db": "node install-database.js",
+    "queries": "node execute-queries.js",
+    "setup": "node install-database.js && npm run test"
+  },
+  "keywords": [
+    "mysql",
+    "node.js",
+    "sql",
+    "database",
+    "queries",
+    "codenotch"
+  ],
+  "author": "Estudiante Codenotch",
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^3.6.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "colors": "^1.4.0",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
