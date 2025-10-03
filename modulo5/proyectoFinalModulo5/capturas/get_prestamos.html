@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GET /prestamos - Museo API</title>
+    <style>body{font-family:monospace;margin:20px;background:#f5f5f5;} pre{background:white;padding:20px;border:1px solid #ccc;}</style>
+</head>
+<body>
+    <h2>http://localhost:3000/prestamos</h2>
+    <pre>{
+  "success": true,
+  "total": 2,
+  "data": [
+    {
+      "id": 1,
+      "codigo_pieza": "MON-001",
+      "pieza_nombre": "Nenúfares",
+      "autor": "Claude Monet",
+      "institucion_prestamo": "Museo de Arte Moderno de Madrid",
+      "responsable_nombre": "Dr. Carmen Martínez",
+      "responsable_email": "c.martinez@mamm.es",
+      "responsable_telefono": null,
+      "fecha_prestamo": "2024-08-01",
+      "fecha_devolucion_prevista": "2024-12-15",
+      "fecha_devolucion_real": null,
+      "estado": "activo",
+      "dias_restantes": 73,
+      "seguro_valor": 75000000.00,
+      "condiciones_prestamo": null,
+      "notas": null
+    },
+    {
+      "id": 2,
+      "codigo_pieza": "GOY-001",
+      "pieza_nombre": "El Tres de Mayo",
+      "autor": "Francisco Goya",
+      "institucion_prestamo": "Centro de Restauración Nacional",
+      "responsable_nombre": "Ana García Restoradora",
+      "responsable_email": "a.garcia@crn.es",
+      "responsable_telefono": null,
+      "fecha_prestamo": "2024-01-15",
+      "fecha_devolucion_prevista": "2024-11-30",
+      "fecha_devolucion_real": null,
+      "estado": "activo",
+      "dias_restantes": 58,
+      "seguro_valor": 80000000.00,
+      "condiciones_prestamo": null,
+      "notas": null
+    }
+  ]
+}</pre>
+</body>
+</html>
