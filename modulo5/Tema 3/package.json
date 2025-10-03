@@ -1,0 +1,24 @@
+{
+  "name": "api-alumnos-asignaturas",
+  "version": "1.0.0",
+  "description": "API REST para gestión de alumnos y sus asignaturas/notas",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "setup": "node setup-database.js",
+    "test": "node test-endpoints.js"
+  },
+  "keywords": ["api", "rest", "mysql", "alumnos", "asignaturas"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
