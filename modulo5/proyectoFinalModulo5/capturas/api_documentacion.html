@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Museo - Simulador</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .endpoint { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .url { color: #0066cc; font-weight: bold; margin-bottom: 10px; }
+        pre { background: #f8f8f8; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .title { color: #333; border-bottom: 2px solid #0066cc; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🏛️ API REST - Sistema de Gestión de Museo</h1>
+        <p><strong>Versión:</strong> 1.0.0</p>
+        <p><strong>Proyecto:</strong> Proyecto Final Módulo 5</p>
+        <p><strong>Base de datos:</strong> museo_db</p>
+        <p><strong>Status:</strong> Funcionando correctamente ✅</p>
+
+        <h2>📋 Endpoints Disponibles</h2>
+        
+        <div class="endpoint">
+            <h3>🖼️ Gestión de Piezas</h3>
+            <ul>
+                <li><strong>GET /piezas</strong> - Listar todas las piezas del museo</li>
+                <li><strong>GET /piezas/:id</strong> - Obtener detalles de una pieza específica</li>
+                <li><strong>POST /piezas</strong> - Crear una nueva pieza en la colección</li>
+                <li><strong>PUT /piezas/:id</strong> - Actualizar los detalles de una pieza</li>
+                <li><strong>DELETE /piezas/:id</strong> - Eliminar una pieza del sistema</li>
+            </ul>
+        </div>
+
+        <div class="endpoint">
+            <h3>🏢 Gestión de Préstamos</h3>
+            <ul>
+                <li><strong>GET /prestamos</strong> - Obtener listado de piezas en préstamo con detalles</li>
+            </ul>
+        </div>
+
+        <div class="endpoint">
+            <h3>🏛️ Gestión de Colecciones</h3>
+            <ul>
+                <li><strong>GET /colecciones</strong> - Listar colecciones y sus piezas</li>
+                <li><strong>GET /colecciones?tipo=permanente</strong> - Filtrar por tipo de colección</li>
+            </ul>
+        </div>
+
+        <div class="endpoint">
+            <h3>📊 Consultas Adicionales</h3>
+            <ul>
+                <li><strong>GET /autores</strong> - Listar todos los autores</li>
+                <li><strong>GET /estadisticas</strong> - Estadísticas generales del museo</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
