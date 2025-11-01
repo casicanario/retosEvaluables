@@ -1,5 +1,5 @@
 /**
- * 📱 APLICACIÓN INTERACTIVA DE CONSULTAS SQL
+ * APLICACIÓN INTERACTIVA DE CONSULTAS SQL
  * Módulo 5 - Tema 1: Sistema de consultas MySQL interactivo
  */
 
