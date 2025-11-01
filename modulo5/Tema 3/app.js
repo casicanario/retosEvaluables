@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
@@ -6,11 +6,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Configuración de la base de datos
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
@@ -18,7 +16,6 @@ const dbConfig = {
     database: process.env.DB_NAME || 'escuela_db'
 };
 
-// Función para obtener conexión a la base de datos
 async function getConnection() {
     try {
         const connection = await mysql.createConnection(dbConfig);
@@ -29,50 +26,89 @@ async function getConnection() {
     }
 }
 
-// ===============================
-// ENDPOINTS ALUMNOS
-// ===============================
+app.get('/', (req, res) => {
+    res.json({
+        mensaje: 'API REST de Alumnos y Asignaturas - Modulo 5 Tema 3',
+        version: '1.0.0',
+        endpoints: {
+            alumnos: {
+                'GET /alumnos': 'Lista todos los alumnos',
+                'GET /alumnos/:id': 'Obtiene un alumno por ID',
+                'POST /alumnos': 'Crea un nuevo alumno',
+                'PUT /alumnos/:id': 'Actualiza un alumno',
+                'DELETE /alumnos/:id': 'Elimina un alumno'
+            },
+            notas: {
+                'GET /media/:id': 'Obtiene la media de notas de un alumno',
+                'GET /asignaturas/:id': 'Lista asignaturas de un alumno'
+            }
+        }
+    });
+});
 
-// GET /alumnos/:id o /alumnos/:nombre - Obtiene los datos del alumno
-app.get('/alumnos/:identificador', async (req, res) => {
-    const { identificador } = req.params;
+// GET /alumnos - Obtiene todos los alumnos
+app.get('/alumnos', async (req, res) => {
     let connection;
-
     try {
         connection = await getConnection();
+        const [rows] = await connection.execute(
+            'SELECT student_id, first_name, last_name, email, phone, enrollment_date FROM students'
+        );
         
-        // Determinar si es ID (número) o nombre
-        const isId = !isNaN(identificador);
-        const query = isId 
-            ? 'SELECT * FROM alumnos WHERE id = ?'
-            : 'SELECT * FROM alumnos WHERE nombre = ?';
-            
-        const [rows] = await connection.execute(query, [identificador]);
-        
-        if (rows.length === 0) {
-            return res.status(404).json({ error: 'Alumno no encontrado' });
-        }
-        
-        res.json(rows[0]);
+        res.json({
+            success: true,
+            data: rows,
+            total: rows.length
+        });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        console.error('Error obteniendo alumnos:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener la lista de alumnos',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
 });
 
-// GET /alumnos - Obtiene toda la lista de alumnos
-app.get('/alumnos', async (req, res) => {
+// GET /alumnos/:id - Obtiene un alumno por ID
+app.get('/alumnos/:id', async (req, res) => {
     let connection;
-
     try {
+        const { id } = req.params;
+        
+        if (isNaN(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'El ID debe ser un número válido'
+            });
+        }
+
         connection = await getConnection();
-        const [rows] = await connection.execute('SELECT * FROM alumnos ORDER BY id');
-        res.json(rows);
+        const [rows] = await connection.execute(
+            'SELECT student_id, first_name, last_name, email, phone, enrollment_date FROM students WHERE student_id = ?',
+            [id]
+        );
+        
+        if (rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Alumno no encontrado'
+            });
+        }
+
+        res.json({
+            success: true,
+            data: rows[0]
+        });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        console.error('Error obteniendo alumno:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener el alumno',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
@@ -80,226 +116,245 @@ app.get('/alumnos', async (req, res) => {
 
 // POST /alumnos - Añade un nuevo alumno
 app.post('/alumnos', async (req, res) => {
-    const { nombre, email, edad } = req.body;
     let connection;
-
     try {
-        if (!nombre || !email) {
-            return res.status(400).json({ error: 'Nombre y email son requeridos' });
+        const { first_name, last_name, email, phone } = req.body;
+        
+        if (!first_name || !last_name || !email) {
+            return res.status(400).json({
+                success: false,
+                message: 'Los campos first_name, last_name y email son obligatorios'
+            });
         }
 
         connection = await getConnection();
-        const query = 'INSERT INTO alumnos (nombre, email, edad) VALUES (?, ?, ?)';
-        const [result] = await connection.execute(query, [nombre, email, edad || null]);
+        const [result] = await connection.execute(
+            'INSERT INTO students (first_name, last_name, email, phone, enrollment_date) VALUES (?, ?, ?, ?, NOW())',
+            [first_name, last_name, email, phone || null]
+        );
         
         res.status(201).json({
+            success: true,
             message: 'Alumno creado exitosamente',
-            id: result.insertId,
-            alumno: { id: result.insertId, nombre, email, edad }
+            data: {
+                student_id: result.insertId,
+                first_name,
+                last_name,
+                email,
+                phone
+            }
         });
     } catch (error) {
-        console.error('Error:', error);
-        if (error.code === 'ER_DUP_ENTRY') {
-            res.status(409).json({ error: 'El email ya existe' });
-        } else {
-            res.status(500).json({ error: 'Error interno del servidor' });
-        }
+        console.error('Error creando alumno:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al crear el alumno',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
 });
 
-// PUT /alumnos - Modifica los datos de un alumno
+// PUT /alumnos/:id - Modifica un alumno existente
 app.put('/alumnos/:id', async (req, res) => {
-    const { id } = req.params;
-    const { nombre, email, edad } = req.body;
     let connection;
-
     try {
-        connection = await getConnection();
+        const { id } = req.params;
+        const { first_name, last_name, email, phone } = req.body;
         
-        // Verificar que el alumno existe
-        const [existing] = await connection.execute('SELECT * FROM alumnos WHERE id = ?', [id]);
-        if (existing.length === 0) {
-            return res.status(404).json({ error: 'Alumno no encontrado' });
+        if (isNaN(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'El ID debe ser un número válido'
+            });
         }
 
-        const query = 'UPDATE alumnos SET nombre = ?, email = ?, edad = ? WHERE id = ?';
-        await connection.execute(query, [nombre, email, edad, id]);
+        if (!first_name || !last_name || !email) {
+            return res.status(400).json({
+                success: false,
+                message: 'Los campos first_name, last_name y email son obligatorios'
+            });
+        }
+
+        connection = await getConnection();
+        const [result] = await connection.execute(
+            'UPDATE students SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE student_id = ?',
+            [first_name, last_name, email, phone || null, id]
+        );
         
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Alumno no encontrado'
+            });
+        }
+
         res.json({
-            message: 'Alumno actualizado exitosamente',
-            alumno: { id: parseInt(id), nombre, email, edad }
+            success: true,
+            message: 'Alumno actualizado exitosamente'
         });
     } catch (error) {
-        console.error('Error:', error);
-        if (error.code === 'ER_DUP_ENTRY') {
-            res.status(409).json({ error: 'El email ya existe' });
-        } else {
-            res.status(500).json({ error: 'Error interno del servidor' });
-        }
+        console.error('Error actualizando alumno:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al actualizar el alumno',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
 });
 
-// DELETE /alumnos - Elimina un alumno
+// DELETE /alumnos/:id - Elimina un alumno
 app.delete('/alumnos/:id', async (req, res) => {
-    const { id } = req.params;
     let connection;
-
     try {
-        connection = await getConnection();
+        const { id } = req.params;
         
-        // Verificar que el alumno existe
-        const [existing] = await connection.execute('SELECT * FROM alumnos WHERE id = ?', [id]);
-        if (existing.length === 0) {
-            return res.status(404).json({ error: 'Alumno no encontrado' });
-        }
-
-        // Eliminar primero las notas del alumno (por clave foránea)
-        await connection.execute('DELETE FROM notas WHERE alumno_id = ?', [id]);
-        
-        // Eliminar el alumno
-        await connection.execute('DELETE FROM alumnos WHERE id = ?', [id]);
-        
-        res.json({ message: 'Alumno eliminado exitosamente' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    } finally {
-        if (connection) await connection.end();
-    }
-});
-
-// ===============================
-// ENDPOINTS ASIGNATURAS Y NOTAS
-// ===============================
-
-// GET /media?id=5 o /media?nombre=Juan - Obtiene la nota media del alumno
-app.get('/media', async (req, res) => {
-    const { id, nombre } = req.query;
-    let connection;
-
-    try {
-        if (!id && !nombre) {
-            return res.status(400).json({ error: 'Se requiere id o nombre del alumno' });
+        if (isNaN(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'El ID debe ser un número válido'
+            });
         }
 
         connection = await getConnection();
+        const [result] = await connection.execute(
+            'DELETE FROM students WHERE student_id = ?',
+            [id]
+        );
         
-        let alumnoQuery, alumnoParams;
-        if (id) {
-            alumnoQuery = 'SELECT id, nombre FROM alumnos WHERE id = ?';
-            alumnoParams = [id];
-        } else {
-            alumnoQuery = 'SELECT id, nombre FROM alumnos WHERE nombre = ?';
-            alumnoParams = [nombre];
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Alumno no encontrado'
+            });
         }
 
-        const [alumno] = await connection.execute(alumnoQuery, alumnoParams);
-        if (alumno.length === 0) {
-            return res.status(404).json({ error: 'Alumno no encontrado' });
-        }
-
-        const mediaQuery = `
-            SELECT AVG(n.nota) as media_notas, COUNT(n.nota) as total_notas
-            FROM notas n
-            WHERE n.alumno_id = ?
-        `;
-        
-        const [mediaResult] = await connection.execute(mediaQuery, [alumno[0].id]);
-        
         res.json({
-            alumno: alumno[0].nombre,
-            media: mediaResult[0].media_notas ? parseFloat(mediaResult[0].media_notas).toFixed(2) : null,
-            total_notas: mediaResult[0].total_notas
+            success: true,
+            message: 'Alumno eliminado exitosamente'
         });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        console.error('Error eliminando alumno:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al eliminar el alumno',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
 });
 
-// GET /apuntadas?id=5 o /apuntadas?nombre=Juan - Lista las asignaturas del alumno
-app.get('/apuntadas', async (req, res) => {
-    const { id, nombre } = req.query;
+// GET /media/:id - Obtiene la nota media del alumno por ID
+app.get('/media/:id', async (req, res) => {
     let connection;
-
     try {
-        if (!id && !nombre) {
-            return res.status(400).json({ error: 'Se requiere id o nombre del alumno' });
+        const { id } = req.params;
+        
+        if (isNaN(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'El ID debe ser un número válido'
+            });
         }
 
         connection = await getConnection();
-        
-        let query, params;
-        if (id) {
-            query = `
-                SELECT a.nombre as asignatura, n.nota
-                FROM alumnos al
-                JOIN notas n ON al.id = n.alumno_id
-                JOIN asignaturas a ON n.asignatura_id = a.id
-                WHERE al.id = ?
-                ORDER BY a.nombre
-            `;
-            params = [id];
-        } else {
-            query = `
-                SELECT a.nombre as asignatura, n.nota
-                FROM alumnos al
-                JOIN notas n ON al.id = n.alumno_id
-                JOIN asignaturas a ON n.asignatura_id = a.id
-                WHERE al.nombre = ?
-                ORDER BY a.nombre
-            `;
-            params = [nombre];
-        }
-
-        const [rows] = await connection.execute(query, params);
+        const [rows] = await connection.execute(`
+            SELECT 
+                s.student_id,
+                CONCAT(s.first_name, ' ', s.last_name) as nombre_completo,
+                COUNT(m.mark_id) as total_evaluaciones,
+                ROUND(AVG(m.mark), 2) as nota_media,
+                MIN(m.mark) as nota_minima,
+                MAX(m.mark) as nota_maxima
+            FROM students s
+            LEFT JOIN marks m ON s.student_id = m.student_id
+            WHERE s.student_id = ?
+            GROUP BY s.student_id, s.first_name, s.last_name
+        `, [id]);
         
         if (rows.length === 0) {
-            return res.status(404).json({ error: 'No se encontraron asignaturas para este alumno' });
+            return res.status(404).json({
+                success: false,
+                message: 'Alumno no encontrado'
+            });
         }
-        
-        res.json(rows);
+
+        res.json({
+            success: true,
+            data: rows[0]
+        });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        console.error('Error obteniendo media de notas:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener la media de notas',
+            error: error.message
+        });
     } finally {
         if (connection) await connection.end();
     }
 });
 
-// Endpoint de prueba
-app.get('/', (req, res) => {
-    res.json({
-        message: 'API de Alumnos y Asignaturas funcionando correctamente',
-        endpoints: {
-            alumnos: {
-                'GET /alumnos': 'Lista todos los alumnos',
-                'GET /alumnos/:id': 'Obtiene un alumno por ID',
-                'GET /alumnos/:nombre': 'Obtiene un alumno por nombre',
-                'POST /alumnos': 'Crea un nuevo alumno',
-                'PUT /alumnos/:id': 'Actualiza un alumno',
-                'DELETE /alumnos/:id': 'Elimina un alumno'
-            },
-            notas: {
-                'GET /media?id=X': 'Obtiene la media de notas de un alumno',
-                'GET /media?nombre=X': 'Obtiene la media de notas de un alumno',
-                'GET /apuntadas?id=X': 'Lista asignaturas de un alumno',
-                'GET /apuntadas?nombre=X': 'Lista asignaturas de un alumno'
-            }
+// GET /asignaturas/:id - Obtiene las asignaturas del alumno por ID
+app.get('/asignaturas/:id', async (req, res) => {
+    let connection;
+    try {
+        const { id } = req.params;
+        
+        if (isNaN(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'El ID debe ser un número válido'
+            });
         }
-    });
+
+        connection = await getConnection();
+        const [rows] = await connection.execute(`
+            SELECT DISTINCT
+                sub.subject_id,
+                sub.title as nombre_asignatura,
+                sub.semester as semestre,
+                sub.credits as creditos,
+                COUNT(m.mark_id) as evaluaciones_realizadas,
+                ROUND(AVG(m.mark), 2) as nota_media_asignatura
+            FROM subjects sub
+            INNER JOIN marks m ON sub.subject_id = m.subject_id
+            WHERE m.student_id = ?
+            GROUP BY sub.subject_id, sub.title, sub.semester, sub.credits
+            ORDER BY sub.title
+        `, [id]);
+        
+        if (rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'No se encontraron asignaturas para este alumno'
+            });
+        }
+
+        res.json({
+            success: true,
+            data: rows,
+            total: rows.length
+        });
+    } catch (error) {
+        console.error('Error obteniendo asignaturas:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener las asignaturas',
+            error: error.message
+        });
+    } finally {
+        if (connection) await connection.end();
+    }
 });
 
-// Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-    console.log('📚 API de Alumnos y Asignaturas lista para usar');
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log('API de Alumnos y Asignaturas lista para usar');
 });
 
 module.exports = app;
