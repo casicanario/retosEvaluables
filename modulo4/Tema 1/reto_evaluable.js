@@ -1,60 +1,41 @@
 const fs = require('fs');
-   const readline = require('readline');
+const readline = require('readline');
+const path = './usuario.json';
 
-   // Función para leer desde consola
-   function leerDatosConsola(callback) {
-       const rl = readline.createInterface({
-           input: process.stdin,
-           output: process.stdout
-       });
+// 1. Borrar el archivo anterior si existe
+if (fs.existsSync(path)) {
+  fs.unlinkSync(path);
+}
 
-       rl.question('Ingresa tu nombre: ', (name) => {
-           rl.question('Ingresa tu apellido: ', (surname) => {
-               rl.question('Ingresa tu edad: ', (age) => {
-                   
-                   const persona = {
-                       name: name,
-                       surname: surname,
-                       age: parseInt(age)
-                   };
+// 2. Crear interfaz readline
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-                   rl.close();
-                   callback(persona);
-               });
-           });
-       });
-   }
+// 3. Preguntar datos al usuario
+rl.question('Nombre: ', (name) => {
+  rl.question('Apellido: ', (surname) => {
+    rl.question('Edad: ', (age) => {
+      const usuario = { name, surname, age };
 
-   // Función principal
-   function ejecutarReto() {
-       // Primero crear el objeto manualmente
-       const objetoInicial = {
-           name: "Juan",
-           surname: "Pérez",
-           age: 25
-       };
-
-       // Guardar en archivo JSON
-       fs.writeFileSync('persona.json', JSON.stringify(objetoInicial, null, 2));
-       
-       // Leer y mostrar
-       const objetoLeido = JSON.parse(fs.readFileSync('persona.json', 'utf8'));
-       console.log('Objeto inicial guardado:', objetoLeido);
-
-       // Ahora borrar el archivo antes de crear uno nuevo con readline
-       fs.unlinkSync('persona.json');
-       console.log('\nArchivo borrado. Ahora ingresa los datos manualmente:\n');
-
-       // Solicitar datos por consola
-       leerDatosConsola((personaConsola) => {
-           // Guardar el nuevo objeto
-           fs.writeFileSync('persona.json', JSON.stringify(personaConsola, null, 2));
-           
-           // Leer y mostrar usando readline
-           const objetoFinal = JSON.parse(fs.readFileSync('persona.json', 'utf8'));
-           console.log('\nObjeto final guardado:', objetoFinal);
-       });
-   }
-
-   // Ejecutar el reto
-   ejecutarReto();
+      // 4. Guardar el objeto en un archivo JSON
+      fs.writeFile(path, JSON.stringify(usuario, null, 2), (err) => {
+        if (err) {
+          console.error('Error al guardar el archivo:', err);
+        } else {
+          // 5. Leer el archivo y mostrarlo en consola
+          fs.readFile(path, 'utf8', (err, data) => {
+            if (err) {
+              console.error('Error al leer el archivo:', err);
+            } else {
+              console.log('Contenido del archivo JSON:');
+              console.log(JSON.parse(data));
+            }
+            rl.close(); // cerrar readline
+          });
+        }
+      });
+    });
+  });
+});
