@@ -1,29 +1,29 @@
-# 📊 MÓDULO 5 - TEMA 1: MySQL con Node.js
+﻿# MÓDULO 5 - TEMA 1: MySQL con Node.js
 
-## 🎯 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este proyecto implementa todas las consultas SQL requeridas para el Módulo 5 - Tema 1, que incluye la creación de un esquema de base de datos MySQL y la ejecución de diversas operaciones SQL desde una aplicación Node.js.
 
-## 🏗️ Estructura del Proyecto
+## � Estructura del Proyecto
 
 ```
 modulo5/Tema 1/
-├── 📄 01_crear_esquema.sql          # Script para crear la base de datos y tablas
-├── 📄 02_consultas_sql.sql          # Todas las consultas SQL requeridas
-├── 📄 package.json                  # Dependencias del proyecto
-├── 📄 database.js                   # Configuración y conexión MySQL
-├── 📄 app.js                        # Aplicación interactiva principal
-├── 📄 test-connection.js            # Pruebas de conexión
-├── 📄 execute-queries.js            # Ejecución automática de consultas
-├── 📄 .env.example                  # Ejemplo de configuración
-└── 📄 README.md                     # Este archivo
+├──  01_crear_esquema.sql          # Script para crear la base de datos y tablas
+├──  02_consultas_sql.sql          # Todas las consultas SQL requeridas
+├──  package.json                  # Dependencias del proyecto
+├──  database.js                   # Configuración y conexión MySQL
+├──  app.js                        # Aplicación interactiva principal
+├──  test-connection.js            # Pruebas de conexión
+├──  execute-queries.js            # Ejecución automática de consultas
+├──  .env.example                  # Ejemplo de configuración
+└──  README.md                     # Este archivo
 ```
 
-## 🗄️ Esquema de Base de Datos
+##  Esquema de Base de Datos
 
 La base de datos `escuela_db` contiene las siguientes tablas:
 
-### 📊 Tablas Principales:
+###  Tablas Principales:
 - **`direccion`** - Direcciones (eliminada durante las consultas)
 - **`teams`** - Equipos de estudiantes
 - **`students`** - Información de estudiantes
@@ -32,21 +32,21 @@ La base de datos `escuela_db` contiene las siguientes tablas:
 - **`subject_teacher`** - Relación profesores-asignaturas
 - **`marks`** - Notas de los estudiantes
 
-### 🔗 Características:
+###  Características:
 - Relaciones con **Foreign Keys**
 - Índices para optimización
 - Datos de ejemplo realistas
 - Fechas variadas para pruebas temporales
 
-## ⚙️ Instalación y Configuración
+##  Instalación y Configuración
 
-### 1. 📦 Instalar Dependencias
+### 1.  Instalar Dependencias
 
 ```bash
 npm install
 ```
 
-### 2. 🔧 Configuración de Base de Datos
+### 2.  Configuración de Base de Datos
 
 1. Copia el archivo de configuración:
 ```bash
@@ -62,16 +62,16 @@ DB_NAME=escuela_db
 DB_PORT=3306
 ```
 
-### 3. 🏗️ Crear la Base de Datos
+### 3. � Crear la Base de Datos
 
 Ejecuta el script en MySQL Workbench o línea de comandos:
 ```bash
 mysql -u root -p < 01_crear_esquema.sql
 ```
 
-## 🚀 Uso de la Aplicación
+##  Uso de la Aplicación
 
-### 📋 Scripts Disponibles:
+###  Scripts Disponibles:
 
 ```bash
 # Probar conexión a la base de datos
@@ -87,128 +87,128 @@ npm start
 npm run dev
 ```
 
-### 🎮 Aplicación Interactiva
+###  Aplicación Interactiva
 
 La aplicación principal (`npm start`) ofrece un menú interactivo con:
 
-1. **👥 Consultar Estudiantes**
+1. ** Consultar Estudiantes**
    - Ver todos los estudiantes
    - Buscar por nombre
    - Estudiantes por equipo
    - Estadísticas
 
-2. **👨‍🏫 Consultar Profesores**
+2. ** Consultar Profesores**
    - Ver todos los profesores
    - Profesores por departamento
    - Profesores mejor pagados
    - Asignaturas por profesor
 
-3. **📚 Consultar Asignaturas**
+3. ** Consultar Asignaturas**
    - Ver todas las asignaturas
    - Asignaturas por curso
    - Asignaturas con profesores
    - Estadísticas
 
-4. **📊 Consultar Notas**
+4. ** Consultar Notas**
    - Ver todas las notas
    - Notas por estudiante
    - Notas por asignatura
    - Estadísticas de rendimiento
 
-5. **👥 Consultar Equipos**
+5. ** Consultar Equipos**
    - Ver todos los equipos
    - Miembros por equipo
    - Equipos más grandes
    - Crear nuevo equipo
 
-6. **🔧 Operaciones Avanzadas**
+6. ** Operaciones Avanzadas**
    - Consultas personalizadas
    - Info de la base de datos
    - Backup de datos
    - Estadísticas generales
 
-7. **🧪 Pruebas y Mantenimiento**
+7. ** Pruebas y Mantenimiento**
    - Probar conexión
    - Verificar integridad
    - Limpiar datos obsoletos
    - Reindexar tablas
 
-## 📝 Consultas SQL Implementadas
+## � Consultas SQL Implementadas
 
-### ✅ Parte 1: Creación del Esquema
-- ✅ Base de datos `escuela_db`
-- ✅ 7 tablas con relaciones
-- ✅ Índices y optimizaciones
-- ✅ Datos de ejemplo (50+ registros por tabla)
+###  Parte 1: Creación del Esquema
+-  Base de datos `escuela_db`
+-  7 tablas con relaciones
+-  Índices y optimizaciones
+-  Datos de ejemplo (50+ registros por tabla)
 
-### ✅ Parte 2: Consultas Requeridas
+###  Parte 2: Consultas Requeridas
 
-1. **🔧 Modificar tabla direccion:**
-   - ✅ Añadir columna `telefono`
-   - ✅ Eliminar columna temporal
+1. ** Modificar tabla direccion:**
+   -  Añadir columna `telefono`
+   -  Eliminar columna temporal
 
-2. **🗑️ Eliminar tabla direccion:**
-   - ✅ Actualizar referencias FK
-   - ✅ Eliminar constraints
-   - ✅ Eliminar tabla permanentemente
+2. ** Eliminar tabla direccion:**
+   -  Actualizar referencias FK
+   -  Eliminar constraints
+   -  Eliminar tabla permanentemente
 
-3. **🔄 Actualizar notas:**
-   - ✅ Setear todas las notas a 0
-   - ✅ Actualizar notas < 5 a 5.0
+3. **� Actualizar notas:**
+   -  Setear todas las notas a 0
+   -  Actualizar notas < 5 a 5.0
 
-4. **📋 Consultas de información:**
-   - ✅ Nombre y apellido de estudiantes
-   - ✅ Todos los datos de profesores
+4. ** Consultas de información:**
+   -  Nombre y apellido de estudiantes
+   -  Todos los datos de profesores
 
-5. **🗑️ Eliminar datos antiguos:**
-   - ✅ Eliminar notas > 10 años
+5. ** Eliminar datos antiguos:**
+   -  Eliminar notas > 10 años
 
-6. **📊 Verificaciones finales:**
-   - ✅ Estadísticas generales
-   - ✅ Integridad de datos
+6. ** Verificaciones finales:**
+   -  Estadísticas generales
+   -  Integridad de datos
 
-## 🔍 Funcionalidades Técnicas
+##  Funcionalidades Técnicas
 
-### 🏗️ Arquitectura:
+### � Arquitectura:
 - **Pool de conexiones** MySQL para mejor rendimiento
 - **Manejo de errores** robusto
 - **Transacciones** para operaciones críticas
 - **Logging** detallado con colores
 - **Validaciones** de entrada
 
-### 📊 Características:
+###  Características:
 - **Consultas parametrizadas** (SQL injection protection)
 - **Estadísticas de rendimiento** 
 - **Interfaz interactiva** con menús
 - **Backup automático** de logs
 - **Verificación de integridad**
 
-### 🛡️ Seguridad:
+###  Seguridad:
 - Variables de entorno para credenciales
 - Consultas preparadas
 - Validación de entrada
 - Manejo elegante de errores
 
-## 📸 Capturas de Pantalla
+##  Capturas de Pantalla
 
-### 🖥️ Menú Principal
+###  Menú Principal
 ```
-📱 SISTEMA INTERACTIVO DE CONSULTAS SQL
+ SISTEMA INTERACTIVO DE CONSULTAS SQL
 Módulo 5 - Tema 1: Base de Datos Escuela
 ═══════════════════════════════════════════════════════════
-1. 👥 Consultar Estudiantes
-2. 👨‍🏫 Consultar Profesores  
-3. 📚 Consultar Asignaturas
-4. 📊 Consultar Notas
-5. 👥 Consultar Equipos
-6. 🔧 Operaciones Avanzadas
-7. 🧪 Pruebas y Mantenimiento
-0. 🚪 Salir
+1.  Consultar Estudiantes
+2.  Consultar Profesores  
+3.  Consultar Asignaturas
+4.  Consultar Notas
+5.  Consultar Equipos
+6.  Operaciones Avanzadas
+7.  Pruebas y Mantenimiento
+0. � Salir
 ```
 
-### 📊 Ejemplo de Resultados
+###  Ejemplo de Resultados
 ```
-📊 RESULTADOS:
+ RESULTADOS:
 ────────────────────────────────────────────────────────────
 ┌─────────┬─────────────────────┬─────────────────────────────┬──────────────┐
 │ (index) │   nombre_completo   │           email             │    equipo    │
@@ -217,31 +217,31 @@ Módulo 5 - Tema 1: Base de Datos Escuela
 │    1    │   'Carlos López'    │   'carlos.lopez@email.com'  │  'Equipo B'  │
 └─────────┴─────────────────────┴─────────────────────────────┴──────────────┘
 
-📈 Total de registros: 25
-⏱️  Tiempo de ejecución: 45ms
+� Total de registros: 25
+⏱  Tiempo de ejecución: 45ms
 ```
 
-## 🧪 Pruebas
+##  Pruebas
 
-### 🔌 Test de Conexión
+### � Test de Conexión
 ```bash
 npm run test
 ```
 
 Verifica:
-- ✅ Conexión a MySQL
-- ✅ Existencia de tablas
-- ✅ Integridad de datos
-- ✅ Estadísticas generales
+-  Conexión a MySQL
+-  Existencia de tablas
+-  Integridad de datos
+-  Estadísticas generales
 
-### 🚀 Ejecución Automática
+###  Ejecución Automática
 ```bash
 npm run queries
 ```
 
 Ejecuta todas las consultas SQL requeridas automáticamente y genera un log detallado.
 
-## 📊 Logs y Monitoreo
+##  Logs y Monitoreo
 
 La aplicación genera logs detallados:
 - `execution-log.json` - Log de ejecución de consultas
@@ -249,7 +249,7 @@ La aplicación genera logs detallados:
 - Conteo de registros afectados
 - Mensajes de error detallados
 
-## 🔧 Resolución de Problemas
+##  Resolución de Problemas
 
 ### ❌ Error de Conexión
 ```
@@ -275,18 +275,18 @@ Error: Table 'escuela_db.direccion' doesn't exist
 ```
 **Solución:** Normal después de ejecutar las consultas (la tabla se elimina)
 
-## 🎯 Objetivos Cumplidos
+##  Objetivos Cumplidos
 
-- ✅ **Creación completa del esquema** con 7 tablas relacionadas
-- ✅ **Todas las consultas SQL** requeridas implementadas
-- ✅ **Aplicación Node.js** interactiva funcional
-- ✅ **Sistema de consultas** robusto y escalable
-- ✅ **Documentación completa** con ejemplos
-- ✅ **Manejo de errores** y validaciones
-- ✅ **Interfaz de usuario** intuitiva
-- ✅ **Logs y monitoreo** detallados
+-  **Creación completa del esquema** con 7 tablas relacionadas
+-  **Todas las consultas SQL** requeridas implementadas
+-  **Aplicación Node.js** interactiva funcional
+-  **Sistema de consultas** robusto y escalable
+-  **Documentación completa** con ejemplos
+-  **Manejo de errores** y validaciones
+-  **Interfaz de usuario** intuitiva
+-  **Logs y monitoreo** detallados
 
-## 📚 Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 - **Node.js** v16+
 - **MySQL2** - Driver MySQL para Node.js
@@ -295,17 +295,17 @@ Error: Table 'escuela_db.direccion' doesn't exist
 - **Dotenv** - Manejo de variables de entorno
 - **Readline** - Interfaz interactiva
 
-## 👨‍💻 Autor
+##  Autor
 
 **Estudiante Codenotch**  
 Módulo 5 - Tema 1: MySQL con Node.js
 
-## 📄 Licencia
+##  Licencia
 
 MIT License - Proyecto educativo para Codenotch
 
 ---
 
-🎉 **¡Proyecto completado exitosamente!** 🎉
+ **¡Proyecto completado exitosamente!** 
 
 Para cualquier duda o problema, revisar la documentación o contactar al instructor.

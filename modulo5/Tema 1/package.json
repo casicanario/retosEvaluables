@@ -9,7 +9,7 @@
     "dev": "nodemon app.js",
     "test": "node test-connection.js",
     "install-db": "node install-database.js",
-    "queries": "node execute-queries.js",
+    "queries": "node consultas.js",
     "setup": "node install-database.js && npm run test"
   },
   "keywords": [
