@@ -129,10 +129,10 @@ app.get('/consultas/nota-media-asignatura/:asignaturaId', async (req, res) => {
         const { asignaturaId } = req.params;
         
         const query = `
-            SELECT 
+            SELECT
                 s.subject_id,
                 s.title as asignatura,
-                s.course as curso,
+                s.semester as semestre,
                 COUNT(m.mark_id) as total_notas,
                 ROUND(AVG(m.mark), 2) as nota_media,
                 MIN(m.mark) as nota_minima,
@@ -141,10 +141,8 @@ app.get('/consultas/nota-media-asignatura/:asignaturaId', async (req, res) => {
             FROM subjects s
             LEFT JOIN marks m ON s.subject_id = m.subject_id
             WHERE s.subject_id = ?
-            GROUP BY s.subject_id, s.title, s.course
-        `;
-        
-        const result = await executeQuery(query, [asignaturaId]);
+            GROUP BY s.subject_id, s.title, s.semester
+        `;        const result = await executeQuery(query, [asignaturaId]);
         
         if (!result.success) {
             return res.status(500).json({
@@ -201,7 +199,7 @@ app.get('/consultas/alumnos-rango-notas/:min/:max', async (req, res) => {
                 m.mark as nota,
                 m.exam_date as fecha_examen,
                 sub.title as asignatura,
-                sub.course as curso,
+                sub.semester as semestre,
                 YEAR(m.exam_date) as año_examen
             FROM students s
             JOIN marks m ON s.student_id = m.student_id
@@ -255,7 +253,7 @@ app.get('/consultas/media-ultimo-ano/:asignaturaId', async (req, res) => {
             SELECT 
                 s.subject_id,
                 s.title as asignatura,
-                s.course as curso,
+                s.semester as semestre,
                 s.credits as creditos,
                 COUNT(m.mark_id) as total_notas_ultimo_ano,
                 ROUND(AVG(m.mark), 2) as media_ultimo_ano,
@@ -271,7 +269,7 @@ app.get('/consultas/media-ultimo-ano/:asignaturaId', async (req, res) => {
             LEFT JOIN marks m ON s.subject_id = m.subject_id 
                 AND m.exam_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
             WHERE s.subject_id = ?
-            GROUP BY s.subject_id, s.title, s.course, s.credits
+            GROUP BY s.subject_id, s.title, s.semester, s.credits
         `;
         
         const result = await executeQuery(query, [asignaturaId]);
@@ -365,7 +363,7 @@ app.get('/consultas/media-alumno-ultimo-ano/:estudianteId', async (req, res) => 
         const detalleQuery = `
             SELECT 
                 sub.title as asignatura,
-                sub.course as curso,
+                sub.semester as semestre,
                 COUNT(m.mark_id) as evaluaciones,
                 ROUND(AVG(m.mark), 2) as media_asignatura,
                 MIN(m.mark) as nota_minima,
@@ -374,7 +372,7 @@ app.get('/consultas/media-alumno-ultimo-ano/:estudianteId', async (req, res) => 
             JOIN subjects sub ON m.subject_id = sub.subject_id
             WHERE m.student_id = ?
               AND m.exam_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
-            GROUP BY sub.subject_id, sub.title, sub.course
+            GROUP BY sub.subject_id, sub.title, sub.semester
             ORDER BY media_asignatura DESC
         `;
         
@@ -413,7 +411,7 @@ app.get('/consultas/total-alumnos-asignatura', async (req, res) => {
             SELECT 
                 sub.subject_id,
                 sub.title as nombre_asignatura,
-                sub.course as curso,
+                sub.semester as semestre,
                 sub.credits as creditos,
                 CONCAT(t.first_name, ' ', t.last_name) as profesor_nombre_apellidos,
                 t.department as departamento_profesor,
@@ -428,9 +426,9 @@ app.get('/consultas/total-alumnos-asignatura', async (req, res) => {
             JOIN teachers t ON st.teacher_id = t.teacher_id
             LEFT JOIN marks m ON sub.subject_id = m.subject_id
             WHERE t.active = TRUE
-            GROUP BY sub.subject_id, sub.title, sub.course, sub.credits, 
+            GROUP BY sub.subject_id, sub.title, sub.semester, sub.credits, 
                      t.teacher_id, t.first_name, t.last_name, t.department, t.email
-            ORDER BY total_alumnos DESC, sub.course, sub.title
+            ORDER BY total_alumnos DESC, sub.semester, sub.title
         `;
         
         const result = await executeQuery(query);
@@ -555,10 +553,10 @@ app.get('/asignaturas', async (req, res) => {
             SELECT 
                 subject_id,
                 title as nombre,
-                course as curso,
+                semester as semestre,
                 credits as creditos
             FROM subjects
-            ORDER BY course, title
+            ORDER BY semester, title
         `;
         
         const result = await executeQuery(query);
