@@ -1,0 +1,21 @@
+{
+  "name": "photos-crud-mongodb",
+  "version": "1.0.0",
+  "description": "Sistema CRUD para gestión de fotos con MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node test.js"
+  },
+  "keywords": ["mongodb", "crud", "photos", "nodejs"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
