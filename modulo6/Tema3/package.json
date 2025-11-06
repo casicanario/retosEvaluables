@@ -1,0 +1,23 @@
+{
+  "name": "agregaciones-mongodb",
+  "version": "1.0.0",
+  "description": "Sistema de agregaciones con MongoDB para gestión de calificaciones",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node test.js",
+    "reto1": "node reto1.js",
+    "reto2": "node reto2.js"
+  },
+  "keywords": ["mongodb", "agregaciones", "pipeline", "nodejs"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
