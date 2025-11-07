@@ -1,0 +1,24 @@
+{
+  "name": "api-rest-photos-mongodb",
+  "version": "1.0.0",
+  "description": "API REST para gestión de fotos con MongoDB - Módulo 6 Tema 4",
+  "main": "src/apiRest.js",
+  "scripts": {
+    "start": "node src/apiRest.js",
+    "dev": "nodemon src/apiRest.js",
+    "test": "node test-api.js"
+  },
+  "keywords": ["api", "rest", "mongodb", "express", "photos", "nodejs"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongoose": "^7.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
