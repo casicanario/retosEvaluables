@@ -1,0 +1,17 @@
+{
+  "name": "bbdd-profesionales",
+  "version": "1.0.0",
+  "description": "Base de datos MongoDB para gestión de profesionales",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.3"
+  },
+  "keywords": ["mongodb", "profesionales", "bbdd"],
+  "author": "Tu nombre",
+  "license": "MIT"
+}
