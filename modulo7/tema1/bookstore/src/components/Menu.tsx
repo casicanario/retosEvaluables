@@ -16,6 +16,12 @@ const Menu = () => {
         Libros
       </Link>
       <Link 
+        to="/books" 
+        className="text-gray-700 hover:text-gray-900 transition-colors"
+      >
+        Books
+      </Link>
+      <Link 
         to="/login" 
         className="text-gray-700 hover:text-gray-900 transition-colors"
       >
