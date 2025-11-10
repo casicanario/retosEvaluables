@@ -4,7 +4,7 @@ import Menu from './Menu';
 const Header = () => {
   return (
     <header className="bg-emerald-400 shadow-md">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         <Logo />
         <Menu />
       </div>

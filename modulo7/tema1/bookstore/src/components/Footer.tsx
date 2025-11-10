@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="bg-emerald-400 mt-auto">
-      <div className="container mx-auto px-4 py-4 flex justify-center items-center gap-4">
+      <div className="container mx-auto px-6 py-4 flex justify-center items-center gap-4">
         <a 
           href="https://facebook.com" 
           target="_blank" 
@@ -9,8 +9,8 @@ const Footer = () => {
           className="text-gray-700 hover:text-gray-900 transition-colors"
         >
           <svg 
-            width="24" 
-            height="24" 
+            width="20" 
+            height="20" 
             viewBox="0 0 24 24" 
             fill="currentColor"
           >
@@ -24,8 +24,8 @@ const Footer = () => {
           className="text-gray-700 hover:text-gray-900 transition-colors"
         >
           <svg 
-            width="24" 
-            height="24" 
+            width="20" 
+            height="20" 
             viewBox="0 0 24 24" 
             fill="currentColor"
           >
@@ -39,8 +39,8 @@ const Footer = () => {
           className="text-gray-700 hover:text-gray-900 transition-colors"
         >
           <svg 
-            width="24" 
-            height="24" 
+            width="20" 
+            height="20" 
             viewBox="0 0 24 24" 
             fill="currentColor"
           >

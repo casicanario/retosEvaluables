@@ -5,27 +5,33 @@ const Menu = () => {
     <nav className="flex gap-6">
       <Link 
         to="/" 
-        className="text-gray-700 hover:text-gray-900 transition-colors"
+        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
       >
-        Home
+        Perfil
       </Link>
       <Link 
         to="/libros" 
-        className="text-gray-700 hover:text-gray-900 transition-colors"
+        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
       >
         Libros
       </Link>
       <Link 
         to="/books" 
-        className="text-gray-700 hover:text-gray-900 transition-colors"
+        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
       >
-        Books
+        About Libro
       </Link>
       <Link 
         to="/login" 
-        className="text-gray-700 hover:text-gray-900 transition-colors"
+        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
       >
-        Log In
+        Editar Libro
+      </Link>
+      <Link 
+        to="/login" 
+        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+      >
+        Log Out
       </Link>
     </nav>
   );
