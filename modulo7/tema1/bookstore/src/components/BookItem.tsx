@@ -24,29 +24,30 @@ const BookItem = ({ book, onEdit, onDelete }: BookItemProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <img 
-        src={book.photo} 
-        alt={book.title}
-        className="w-full h-80 object-cover"
-      />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-1">{book.title}</h3>
-        <p className="text-sm text-gray-600 mb-1">{book.author}</p>
-        <p className="text-xs text-gray-500 mb-3">{book.type}</p>
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xl font-bold text-teal-600">${book.price}</span>
+    <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+      <div className="relative">
+        <img 
+          src={book.photo} 
+          alt={book.title}
+          className="w-full h-48 object-cover"
+        />
+      </div>
+      <div className="p-2">
+        <h3 className="text-xs font-semibold text-gray-800 mb-1 truncate">{book.title}</h3>
+        <p className="text-xs text-gray-500 mb-2 truncate">{book.author}</p>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-sm font-bold text-gray-800">{book.price}€</span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           <button 
             onClick={handleEditBook}
-            className="flex-1 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors font-medium"
+            className="flex-1 bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600 transition-colors"
           >
             Editar
           </button>
           <button 
             onClick={handleDeleteBook}
-            className="flex-1 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors font-medium"
+            className="flex-1 bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600 transition-colors"
           >
             Borrar
           </button>

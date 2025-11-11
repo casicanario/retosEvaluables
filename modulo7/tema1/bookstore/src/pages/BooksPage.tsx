@@ -19,7 +19,7 @@ const BooksPage = () => {
       type: 'Novela',
       author: 'Patrick Süskind',
       price: 19.99,
-      photo: 'https://via.placeholder.com/200x300/8B7355/FFFFFF?text=El+Perfume'
+      photo: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop'
     },
     {
       id_book: 2,
@@ -28,7 +28,7 @@ const BooksPage = () => {
       type: 'Novela',
       author: 'Gabriel García Márquez',
       price: 22.50,
-      photo: 'https://via.placeholder.com/200x300/4A5568/FFFFFF?text=Cien+años'
+      photo: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop'
     },
     {
       id_book: 3,
@@ -37,7 +37,7 @@ const BooksPage = () => {
       type: 'Ficción distópica',
       author: 'George Orwell',
       price: 18.99,
-      photo: 'https://via.placeholder.com/200x300/2C3E50/FFFFFF?text=1984'
+      photo: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&h=600&fit=crop'
     },
     {
       id_book: 4,
@@ -46,7 +46,7 @@ const BooksPage = () => {
       type: 'Infantil',
       author: 'Antoine de Saint-Exupéry',
       price: 12.99,
-      photo: 'https://via.placeholder.com/200x300/3498DB/FFFFFF?text=Principito'
+      photo: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop'
     },
     {
       id_book: 5,
@@ -55,7 +55,7 @@ const BooksPage = () => {
       type: 'Clásico',
       author: 'Miguel de Cervantes',
       price: 24.99,
-      photo: 'https://via.placeholder.com/200x300/E67E22/FFFFFF?text=Quijote'
+      photo: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop'
     },
     {
       id_book: 6,
@@ -64,7 +64,7 @@ const BooksPage = () => {
       type: 'Romance',
       author: 'Jane Austen',
       price: 16.99,
-      photo: 'https://via.placeholder.com/200x300/9B59B6/FFFFFF?text=Orgullo'
+      photo: 'https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400&h=600&fit=crop'
     }
   ];
 
