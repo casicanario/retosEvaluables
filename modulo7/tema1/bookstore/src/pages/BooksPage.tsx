@@ -79,14 +79,9 @@ const BooksPage = () => {
   };
 
   return (
-    <div className="flex-1 py-12 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-6">
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent mb-4">
-            Books Collection
-          </h1>
-          <p className="text-gray-600 text-lg">Descubre nuestra selección de libros</p>
-        </div>
+    <div className="flex-1 py-8 bg-white">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-blue-600 mb-8 text-center">Books</h1>
         <BookList 
           books={books} 
           onEdit={handleEditBook}

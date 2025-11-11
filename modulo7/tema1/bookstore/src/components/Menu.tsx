@@ -2,34 +2,34 @@ import { Link } from 'react-router-dom';
 
 const Menu = () => {
   return (
-    <nav className="flex gap-6">
+    <nav style={{ display: 'flex', gap: '32px' }}>
       <Link 
         to="/" 
-        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
       >
         Perfil
       </Link>
       <Link 
         to="/libros" 
-        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
       >
         Libros
       </Link>
       <Link 
         to="/books" 
-        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
       >
-        About Libro
+        Añadir Libro
       </Link>
       <Link 
         to="/login" 
-        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
       >
         Editar Libro
       </Link>
       <Link 
         to="/login" 
-        className="text-gray-700 font-medium hover:text-gray-900 transition-colors px-2"
+        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
       >
         Log Out
       </Link>

@@ -9,7 +9,7 @@ import BooksPage from './pages/BooksPage';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="min-h-screen flex flex-col bg-white">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="bg-emerald-400 mt-auto">
-      <div className="container mx-auto px-6 py-4 flex justify-center items-center gap-4">
+    <footer style={{ backgroundColor: '#6ee7b7' }} className="mt-auto w-full">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-center items-center gap-4">
         <a 
           href="https://facebook.com" 
           target="_blank" 

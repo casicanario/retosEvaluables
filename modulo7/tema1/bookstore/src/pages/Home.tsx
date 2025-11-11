@@ -1,15 +1,28 @@
 const Home = () => {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center py-16 bg-white">
-      <h1 className="text-5xl font-bold text-blue-600 mb-8">
+    <div style={{ 
+      flex: 1, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      padding: '64px 16px',
+      backgroundColor: 'white'
+    }}>
+      <h1 style={{ 
+        fontSize: '48px', 
+        fontWeight: 'bold', 
+        color: '#3b82f6',
+        marginBottom: '32px'
+      }}>
         Home
       </h1>
-      <div className="text-center max-w-2xl px-6">
-        <p className="text-lg text-gray-700 mb-2">
-          "The only way to learn is live."
+      <div style={{ textAlign: 'center', maxWidth: '672px', padding: '0 24px' }}>
+        <p style={{ fontSize: '18px', color: '#374151', marginBottom: '8px' }}>
+          "The only way to learn is to live."
         </p>
-        <p className="text-sm text-gray-600">
-          <span className="underline cursor-pointer hover:text-blue-600">Matt Haig</span> - The Midnight Library
+        <p style={{ fontSize: '14px', color: '#6b7280' }}>
+          <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>Matt Haig</span> - The Midnight Library
         </p>
       </div>
     </div>
