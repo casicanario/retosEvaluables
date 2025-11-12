@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom';
 
-const Menu = () => {
+interface MenuProps {
+  vertical?: boolean;
+  onClose?: () => void;
+}
+
+const Menu = ({ vertical = false, onClose }: MenuProps) => {
   return (
     <nav>
-      <ul className="flex space-x-6">
+      <ul className={vertical ? "flex flex-col space-y-4" : "flex space-x-6"}>
         <li>
           <Link 
             to="/" 
+            onClick={onClose}
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Home
@@ -14,7 +20,8 @@ const Menu = () => {
         </li>
         <li>
           <Link 
-            to="/libros" 
+            to="/libros"
+            onClick={onClose}
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Libros
@@ -22,7 +29,8 @@ const Menu = () => {
         </li>
         <li>
           <Link 
-            to="/login" 
+            to="/login"
+            onClick={onClose}
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Log In
