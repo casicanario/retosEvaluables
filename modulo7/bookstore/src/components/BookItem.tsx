@@ -1,11 +1,14 @@
 interface BookItemProps {
+  id: number;
   title: string;
   author: string;
   isbn: string;
   image: string;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
-const BookItem = ({ title, author, isbn, image }: BookItemProps) => {
+const BookItem = ({ id, title, author, isbn, image, onEdit, onDelete }: BookItemProps) => {
   return (
     <div className="border border-gray-300 rounded-lg p-4 mb-4 bg-white shadow-md">
       <img 
@@ -20,10 +23,16 @@ const BookItem = ({ title, author, isbn, image }: BookItemProps) => {
         <span>ISBN: {isbn}</span>
       </p>
       <div className="flex gap-2 mt-3">
-        <button className="flex-1 py-2 px-4 bg-blue-500 text-white rounded font-medium hover:bg-blue-600 transition-colors">
-          Ver más
+        <button 
+          onClick={() => onEdit(id)}
+          className="flex-1 py-2 px-4 bg-blue-500 text-white rounded font-medium hover:bg-blue-600 transition-colors"
+        >
+          Editar
         </button>
-        <button className="flex-1 py-2 px-4 bg-red-500 text-white rounded font-medium hover:bg-red-600 transition-colors">
+        <button 
+          onClick={() => onDelete(id)}
+          className="flex-1 py-2 px-4 bg-red-500 text-white rounded font-medium hover:bg-red-600 transition-colors"
+        >
           Eliminar
         </button>
       </div>
