@@ -1,38 +1,32 @@
-import { Link } from 'react-router-dom';
-
 const Menu = () => {
   return (
-    <nav style={{ display: 'flex', gap: '32px' }}>
-      <Link 
-        to="/" 
-        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
-      >
-        Perfil
-      </Link>
-      <Link 
-        to="/libros" 
-        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
-      >
-        Libros
-      </Link>
-      <Link 
-        to="/books" 
-        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
-      >
-        Añadir Libro
-      </Link>
-      <Link 
-        to="/login" 
-        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
-      >
-        Editar Libro
-      </Link>
-      <Link 
-        to="/login" 
-        style={{ color: '#374151', fontWeight: '500', textDecoration: 'none', padding: '0 12px' }}
-      >
-        Log Out
-      </Link>
+    <nav>
+      <ul className="flex space-x-6">
+        <li>
+          <a 
+            href="#home" 
+            className="text-white hover:text-gray-200 font-medium transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#libros" 
+            className="text-white hover:text-gray-200 font-medium transition-colors"
+          >
+            Libros
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#login" 
+            className="text-white hover:text-gray-200 font-medium transition-colors"
+          >
+            Log In
+          </a>
+        </li>
+      </ul>
     </nav>
   );
 };
