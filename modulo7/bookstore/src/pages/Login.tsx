@@ -2,9 +2,11 @@ import { useState, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useUser } from '../contexts/UserContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useUser();
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
@@ -60,8 +62,8 @@ const Login = () => {
         password: formValues.password
       });
 
-      // Guardar usuario en localStorage
-      localStorage.setItem('user', JSON.stringify(response.data));
+      // Usar la función login del contexto
+      login(response.data);
       
       toast.success('¡Login exitoso! Bienvenido');
       navigate('/books');

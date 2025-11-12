@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useUser } from '../contexts/UserContext';
 
 const bookSchema = z.object({
   titulo: z.string().min(1, "El titulo es requerido"),
@@ -17,20 +18,17 @@ type BookFormValues = z.infer<typeof bookSchema>;
 
 const AddBook = () => {
   const navigate = useNavigate();
+  const { user } = useUser();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<BookFormValues>({
     resolver: zodResolver(bookSchema)
   });
 
   const onSubmit = async (data: BookFormValues) => {
     try {
-      // Obtener usuario de localStorage
-      const userStr = localStorage.getItem('user');
-      if (!userStr) {
+      if (!user) {
         toast.error('No hay usuario autenticado');
         return;
       }
-
-      const user = JSON.parse(userStr);
 
       await axios.post('http://localhost:3000/api/books', {
         id_user: user.id_user,

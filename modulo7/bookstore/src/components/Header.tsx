@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 import Logo from './Logo';
 import Menu from './Menu';
 import Sidebar from './Sidebar';
 
 const Header = () => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <>
@@ -16,8 +25,19 @@ const Header = () => {
           </div>
           
           {/* Menú desktop - oculto en móvil */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-4">
             <Menu />
+            {user && (
+              <div className="flex items-center space-x-3">
+                <span className="text-white">Hola, {user.name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Cerrar sesión
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Botón hamburguesa - visible solo en móvil */}

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 import Menu from './Menu';
 
 interface SidebarProps {
@@ -6,6 +8,15 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    onClose();
+    navigate('/login');
+  };
+
   return (
     <>
       {/* Overlay */}
@@ -32,6 +43,17 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             </svg>
           </button>
           <Menu vertical onClose={onClose} />
+          {user && (
+            <div className="mt-6 border-t border-white pt-4">
+              <p className="text-white mb-2">Hola, {user.name}</p>
+              <button
+                onClick={handleLogout}
+                className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useUser } from '../contexts/UserContext';
 
 type FormValues = {
   name: string;
@@ -8,7 +10,18 @@ type FormValues = {
 };
 
 const Profile = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  const { user } = useUser();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>();
+
+  // Cargar datos del usuario cuando el componente se monta
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name);
+      setValue('apellidos', user.last_name);
+      setValue('email', user.email);
+      setValue('foto', user.photo || '');
+    }
+  }, [user, setValue]);
 
   const onSubmit = (data: FormValues) => {
     console.log('Profile data:', data);

@@ -1,13 +1,13 @@
 import { Navigate } from 'react-router-dom';
 import { ReactElement } from 'react';
+import { useUser } from '../contexts/UserContext';
 
 interface PrivateRoutesProps {
   children: ReactElement;
 }
 
 const PrivateRoutes = ({ children }: PrivateRoutesProps) => {
-  // Variable fake para pruebas
-  const user = null;
+  const { user } = useUser();
 
   if (!user) {
     return <Navigate to="/login" />;

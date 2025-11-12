@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useUser } from '../contexts/UserContext';
 import BookList from '../components/BookList';
 
 interface Book {
@@ -14,21 +15,19 @@ interface Book {
 }
 
 const BooksPage = () => {
+  const { user } = useUser();
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        // Obtener usuario de localStorage
-        const userStr = localStorage.getItem('user');
-        if (!userStr) {
+        if (!user) {
           toast.error('No hay usuario autenticado');
           setLoading(false);
           return;
         }
 
-        const user = JSON.parse(userStr);
         const response = await axios.get(`http://localhost:3000/api/books?id_user=${user.id_user}`);
         
         setBooks(response.data);
@@ -41,7 +40,7 @@ const BooksPage = () => {
     };
 
     fetchBooks();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (
