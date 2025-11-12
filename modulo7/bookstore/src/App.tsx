@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import AddBook from './pages/AddBook';
 import EditBook from './pages/EditBook';
+import NotFound from './pages/NotFound';
 import PrivateRoutes from './components/PrivateRoutes';
 import PublicRoutes from './components/PublicRoutes';
 
@@ -28,7 +29,8 @@ function App() {
               <Route path="/profile" element={<PrivateRoutes><Profile /></PrivateRoutes>} />
               <Route path="/books" element={<PrivateRoutes><BooksPage /></PrivateRoutes>} />
               <Route path="/addbook" element={<PrivateRoutes><AddBook /></PrivateRoutes>} />
-              <Route path="/editbook" element={<PrivateRoutes><EditBook /></PrivateRoutes>} />
+              <Route path="/editbook/:id_book" element={<PrivateRoutes><EditBook /></PrivateRoutes>} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />

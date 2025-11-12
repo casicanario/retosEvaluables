@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useUser } from '../contexts/UserContext';
@@ -19,28 +19,28 @@ const BooksPage = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        if (!user) {
-          toast.error('No hay usuario autenticado');
-          setLoading(false);
-          return;
-        }
-
-        const response = await axios.get(`http://localhost:3000/api/books?id_user=${user.id_user}`);
-        
-        setBooks(response.data);
+  const fetchBooks = useCallback(async () => {
+    try {
+      if (!user) {
+        toast.error('No hay usuario autenticado');
         setLoading(false);
-      } catch (error: any) {
-        toast.error('Error al cargar los libros');
-        console.error('Error fetching books:', error);
-        setLoading(false);
+        return;
       }
-    };
 
-    fetchBooks();
+      const response = await axios.get(`http://localhost:3000/api/books?id_user=${user.id_user}`);
+      
+      setBooks(response.data);
+      setLoading(false);
+    } catch (error: any) {
+      toast.error('Error al cargar los libros');
+      console.error('Error fetching books:', error);
+      setLoading(false);
+    }
   }, [user]);
+
+  useEffect(() => {
+    fetchBooks();
+  }, [fetchBooks]);
 
   if (loading) {
     return (
@@ -57,7 +57,7 @@ const BooksPage = () => {
       {books.length === 0 ? (
         <p className="text-center text-gray-600">No tienes libros todavía. ¡Añade uno!</p>
       ) : (
-        <BookList books={books} />
+        <BookList books={books} onBookDeleted={fetchBooks} />
       )}
     </div>
   );

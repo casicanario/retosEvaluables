@@ -1,3 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useUser } from '../contexts/UserContext';
 import BookItem from './BookItem';
 
 interface Book {
@@ -12,15 +16,38 @@ interface Book {
 
 interface BookListProps {
   books: Book[];
+  onBookDeleted: () => void;
 }
 
-const BookList = ({ books }: BookListProps) => {
+const BookList = ({ books, onBookDeleted }: BookListProps) => {
+  const navigate = useNavigate();
+  const { user } = useUser();
+
   const handleEditBook = (id: number) => {
-    console.log('Editar libro:', id);
+    navigate(`/editbook/${id}`);
   };
 
-  const handleDeleteBook = (id: number) => {
-    console.log('Eliminar libro:', id);
+  const handleDeleteBook = async (id: number) => {
+    if (!user) {
+      toast.error('No hay usuario autenticado');
+      return;
+    }
+
+    if (!window.confirm('¿Estás seguro de que quieres eliminar este libro?')) {
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:3000/api/books/${id}`, {
+        data: { id_user: user.id_user }
+      });
+
+      toast.success('Libro eliminado exitosamente');
+      onBookDeleted();
+    } catch (error: any) {
+      toast.error('Error al eliminar el libro');
+      console.error('Error deleting book:', error);
+    }
   };
 
   return (
