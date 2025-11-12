@@ -4,6 +4,12 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import BooksPage from './pages/BooksPage';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import AddBook from './pages/AddBook';
+import EditBook from './pages/EditBook';
+import PrivateRoutes from './components/PrivateRoutes';
+import PublicRoutes from './components/PublicRoutes';
 
 function App() {
   return (
@@ -13,8 +19,12 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/libros" element={<BooksPage />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<PublicRoutes><Login /></PublicRoutes>} />
+            <Route path="/register" element={<PublicRoutes><Register /></PublicRoutes>} />
+            <Route path="/profile" element={<PrivateRoutes><Profile /></PrivateRoutes>} />
+            <Route path="/books" element={<PrivateRoutes><BooksPage /></PrivateRoutes>} />
+            <Route path="/addbook" element={<PrivateRoutes><AddBook /></PrivateRoutes>} />
+            <Route path="/editbook" element={<PrivateRoutes><EditBook /></PrivateRoutes>} />
           </Routes>
         </main>
         <Footer />
