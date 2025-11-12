@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const bookSchema = z.object({
   titulo: z.string().min(1, "El titulo es requerido"),
   autor: z.string().min(1, "El autor es requerido"),
-  tipo: z.string().min(1, "El tipo de libro es requerido"),
+  tipo: z.string().min(1, "El tipo es requerido"),
   foto: z.string().min(1, "La foto es requerida"),
   precio: z.string().min(1, "El precio es requerido")
 });
@@ -13,12 +16,38 @@ const bookSchema = z.object({
 type BookFormValues = z.infer<typeof bookSchema>;
 
 const AddBook = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<BookFormValues>({
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<BookFormValues>({
     resolver: zodResolver(bookSchema)
   });
 
-  const onSubmit = (data: BookFormValues) => {
-    console.log('AddBook data:', data);
+  const onSubmit = async (data: BookFormValues) => {
+    try {
+      // Obtener usuario de localStorage
+      const userStr = localStorage.getItem('user');
+      if (!userStr) {
+        toast.error('No hay usuario autenticado');
+        return;
+      }
+
+      const user = JSON.parse(userStr);
+
+      await axios.post('http://localhost:3000/api/books', {
+        id_user: user.id_user,
+        title: data.titulo,
+        type: data.tipo,
+        author: data.autor,
+        price: parseFloat(data.precio),
+        photo: data.foto
+      });
+
+      toast.success('¡Libro añadido exitosamente!');
+      reset();
+      navigate('/books');
+    } catch (error: any) {
+      toast.error('Error al añadir el libro. Intenta de nuevo');
+      console.error('Error adding book:', error);
+    }
   };
 
   return (
@@ -60,14 +89,16 @@ const AddBook = () => {
             <label htmlFor="tipo" className="block text-gray-700 font-medium mb-2">
               Tipo de libro:
             </label>
-            <input
-              type="text"
+            <select
               id="tipo"
               {...register("tipo")}
-              placeholder="Novela"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
-            />
-            {errors.tipo && <p className="text-red-600 text-sm mt-1">{errors.tipo.message}</p>}
+            >
+              <option value="">Selecciona un tipo</option>
+              <option value="Tapa blanda">Tapa blanda</option>
+              <option value="Tapa Dura">Tapa Dura</option>
+            </select>
+            {errors.tipo?.message && <p className="text-red-600 text-sm mt-1">{errors.tipo.message}</p>}
           </div>
 
           <div>

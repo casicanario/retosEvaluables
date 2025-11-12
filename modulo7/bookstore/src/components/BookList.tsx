@@ -10,64 +10,11 @@ interface Book {
   photo: string;
 }
 
-const BookList = () => {
-  const books: Book[] = [
-    {
-      id_book: 1,
-      id_user: 1,
-      title: 'El Perfume',
-      type: 'Novela',
-      author: 'Patrick Süskind',
-      price: 18.50,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/71QY5JY-ZgL.jpg'
-    },
-    {
-      id_book: 2,
-      id_user: 1,
-      title: 'Cien años de soledad',
-      type: 'Novela',
-      author: 'Gabriel García Márquez',
-      price: 22.00,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/91TvVQS7loL.jpg'
-    },
-    {
-      id_book: 3,
-      id_user: 2,
-      title: '1984',
-      type: 'Distopía',
-      author: 'George Orwell',
-      price: 15.90,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/71rpa1-kyvL.jpg'
-    },
-    {
-      id_book: 4,
-      id_user: 2,
-      title: 'El principito',
-      type: 'Fábula',
-      author: 'Antoine de Saint-Exupéry',
-      price: 12.50,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/71OZY035FKL.jpg'
-    },
-    {
-      id_book: 5,
-      id_user: 3,
-      title: 'Don Quijote de la Mancha',
-      type: 'Novela',
-      author: 'Miguel de Cervantes',
-      price: 25.00,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/91up+-E0B2L.jpg'
-    },
-    {
-      id_book: 6,
-      id_user: 3,
-      title: 'Harry Potter y la piedra filosofal',
-      type: 'Fantasía',
-      author: 'J.K. Rowling',
-      price: 19.95,
-      photo: 'https://images-na.ssl-images-amazon.com/images/I/81iqZ2HHD-L.jpg'
-    }
-  ];
+interface BookListProps {
+  books: Book[];
+}
 
+const BookList = ({ books }: BookListProps) => {
   const handleEditBook = (id: number) => {
     console.log('Editar libro:', id);
   };

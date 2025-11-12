@@ -1,6 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     name: '',
     apellidos: '',
@@ -90,9 +94,35 @@ const Register = () => {
     setErrors(newErrors);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Register data:', formValues);
+
+    // Validar que no haya errores
+    const hasErrors = Object.values(errors).some(error => error !== '');
+    if (hasErrors) {
+      toast.error('Por favor, corrige los errores en el formulario');
+      return;
+    }
+
+    try {
+      await axios.post('http://localhost:3000/api/users/register', {
+        name: formValues.name,
+        last_name: formValues.apellidos,
+        email: formValues.email,
+        photo: formValues.foto,
+        password: formValues.password
+      });
+
+      toast.success('¡Registro exitoso! Ahora puedes iniciar sesión');
+      navigate('/login');
+    } catch (error: any) {
+      if (error.response?.status === 409) {
+        toast.error('Este email ya está registrado');
+      } else {
+        toast.error('Error al registrarse. Intenta de nuevo');
+      }
+      console.error('Error en registro:', error);
+    }
   };
 
   return (

@@ -1,6 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
@@ -41,9 +45,34 @@ const Login = () => {
     setErrors(newErrors);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Login data:', formValues);
+    
+    // Validar que no haya errores
+    if (errors.email || errors.password) {
+      toast.error('Por favor, corrige los errores en el formulario');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/users/login', {
+        email: formValues.email,
+        password: formValues.password
+      });
+
+      // Guardar usuario en localStorage
+      localStorage.setItem('user', JSON.stringify(response.data));
+      
+      toast.success('¡Login exitoso! Bienvenido');
+      navigate('/books');
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        toast.error('Email o contraseña incorrectos');
+      } else {
+        toast.error('Error al iniciar sesión. Intenta de nuevo');
+      }
+      console.error('Error en login:', error);
+    }
   };
 
   return (
