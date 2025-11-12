@@ -1,11 +1,26 @@
+import { useForm } from 'react-hook-form';
+
+type FormValues = {
+  name: string;
+  apellidos: string;
+  email: string;
+  foto: string;
+};
+
 const Profile = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+
+  const onSubmit = (data: FormValues) => {
+    console.log('Profile data:', data);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
         <h1 className="text-3xl font-bold text-center text-cyan-600 mb-2">Tu Perfil</h1>
         <p className="text-center text-gray-600 mb-6">Actualiza tus datos de usuario</p>
         
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
               Name:
@@ -13,9 +28,14 @@ const Profile = () => {
             <input
               type="text"
               id="name"
+              {...register("name", { 
+                required: "El nombre es requerido",
+                minLength: { value: 3, message: "Mínimo 3 caracteres" }
+              })}
               placeholder="Ivancito"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
+            {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
           <div>
@@ -25,9 +45,13 @@ const Profile = () => {
             <input
               type="text"
               id="apellidos"
+              {...register("apellidos", { 
+                required: "Los apellidos son requeridos" 
+              })}
               placeholder="Luengo Padrosa"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
+            {errors.apellidos && <p className="text-red-600 text-sm mt-1">{errors.apellidos.message}</p>}
           </div>
 
           <div>
@@ -37,9 +61,17 @@ const Profile = () => {
             <input
               type="email"
               id="email"
+              {...register("email", { 
+                required: "El email es requerido",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "El email no es válido"
+                }
+              })}
               placeholder="ivluengo@gmail.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
+            {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
@@ -49,9 +81,13 @@ const Profile = () => {
             <input
               type="text"
               id="foto"
+              {...register("foto", { 
+                required: "La foto es requerida" 
+              })}
               placeholder="https://secure.gravatar.co"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
+            {errors.foto && <p className="text-red-600 text-sm mt-1">{errors.foto.message}</p>}
           </div>
 
           <button
