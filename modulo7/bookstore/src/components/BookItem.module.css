@@ -1,0 +1,71 @@
+.bookItem {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bookImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.bookTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.bookAuthor {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.bookIsbn {
+  font-size: 0.75rem;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bookButtons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.bookButtons button {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.bookButtons button:first-child {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.bookButtons button:first-child:hover {
+  background-color: #2563eb;
+}
+
+.bookButtons button:last-child {
+  background-color: #ef4444;
+  color: white;
+}
+
+.bookButtons button:last-child:hover {
+  background-color: #dc2626;
+}

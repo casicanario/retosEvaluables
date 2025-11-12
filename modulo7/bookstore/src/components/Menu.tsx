@@ -1,30 +1,32 @@
+import { Link } from 'react-router-dom';
+
 const Menu = () => {
   return (
     <nav>
       <ul className="flex space-x-6">
         <li>
-          <a 
-            href="#home" 
+          <Link 
+            to="/" 
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a 
-            href="#libros" 
+          <Link 
+            to="/libros" 
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Libros
-          </a>
+          </Link>
         </li>
         <li>
-          <a 
-            href="#login" 
+          <Link 
+            to="/login" 
             className="text-white hover:text-gray-200 font-medium transition-colors"
           >
             Log In
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
