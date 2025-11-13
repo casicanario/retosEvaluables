@@ -12,14 +12,16 @@ interface Book {
   author: string;
   price: number;
   photo: string;
+  is_favorite?: number;
 }
 
 interface BookListProps {
   books: Book[];
   onBookDeleted: () => void;
+  onFavoriteToggled: () => void;
 }
 
-const BookList = ({ books, onBookDeleted }: BookListProps) => {
+const BookList = ({ books, onBookDeleted, onFavoriteToggled }: BookListProps) => {
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -50,6 +52,26 @@ const BookList = ({ books, onBookDeleted }: BookListProps) => {
     }
   };
 
+  const handleToggleFavorite = async (id: number, currentFavorite: number) => {
+    if (!user) {
+      toast.error('No hay usuario autenticado');
+      return;
+    }
+
+    try {
+      await axios.put(`http://localhost:3000/api/books/${id}/favorite`, {
+        id_user: user.id_user,
+        is_favorite: currentFavorite === 1 ? 0 : 1
+      });
+
+      toast.success(currentFavorite === 1 ? 'Eliminado de favoritos' : 'Añadido a favoritos');
+      onFavoriteToggled();
+    } catch (error: any) {
+      toast.error('Error al actualizar favorito');
+      console.error('Error toggling favorite:', error);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {books.map((book) => (
@@ -60,8 +82,10 @@ const BookList = ({ books, onBookDeleted }: BookListProps) => {
           author={book.author}
           isbn={`${book.id_book}-${book.type}`}
           image={book.photo}
+          isFavorite={book.is_favorite === 1}
           onEdit={handleEditBook}
           onDelete={handleDeleteBook}
+          onToggleFavorite={() => handleToggleFavorite(book.id_book, book.is_favorite || 0)}
         />
       ))}
     </div>

@@ -57,11 +57,8 @@ const Register = () => {
     }
 
     if (name === 'foto') {
-      if (value === '') {
-        newErrors.foto = 'La foto es requerida';
-      } else {
-        newErrors.foto = '';
-      }
+      // El campo foto es opcional
+      newErrors.foto = '';
     }
 
     if (name === 'password') {
@@ -97,10 +94,19 @@ const Register = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Validar que no haya errores
-    const hasErrors = Object.values(errors).some(error => error !== '');
-    if (hasErrors) {
+    // Validar que no haya errores y que los campos obligatorios estén llenos
+    if (errors.name || errors.apellidos || errors.email || errors.password || errors.repeatPassword) {
       toast.error('Por favor, corrige los errores en el formulario');
+      return;
+    }
+
+    if (!formValues.name || !formValues.apellidos || !formValues.email || !formValues.password) {
+      toast.error('Por favor, completa todos los campos obligatorios');
+      return;
+    }
+
+    if (formValues.password !== formValues.repeatPassword) {
+      toast.error('Las contraseñas no coinciden');
       return;
     }
 
@@ -109,7 +115,7 @@ const Register = () => {
         name: formValues.name,
         last_name: formValues.apellidos,
         email: formValues.email,
-        photo: formValues.foto,
+        photo: formValues.foto || null,
         password: formValues.password
       });
 
@@ -182,7 +188,7 @@ const Register = () => {
 
           <div>
             <label htmlFor="foto" className="block text-gray-700 font-medium mb-2">
-              Foto:
+              Foto (opcional):
             </label>
             <input
               type="text"
@@ -190,7 +196,7 @@ const Register = () => {
               name="foto"
               value={formValues.foto}
               onChange={handleChange}
-              placeholder="https://photo.jpg"
+              placeholder="https://i.imgur.com/tu-foto.jpg"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
             {errors.foto && <p className="text-red-600 text-sm mt-1">{errors.foto}</p>}

@@ -4,13 +4,22 @@ interface BookItemProps {
   author: string;
   isbn: string;
   image: string;
+  isFavorite: boolean;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
+  onToggleFavorite: () => void;
 }
 
-const BookItem = ({ id, title, author, isbn, image, onEdit, onDelete }: BookItemProps) => {
+const BookItem = ({ id, title, author, isbn, image, isFavorite, onEdit, onDelete, onToggleFavorite }: BookItemProps) => {
   return (
-    <div className="border border-gray-300 rounded-lg p-4 mb-4 bg-white shadow-md">
+    <div className="border border-gray-300 rounded-lg p-4 mb-4 bg-white shadow-md relative">
+      <button
+        onClick={onToggleFavorite}
+        className="absolute top-2 right-2 text-3xl transition-transform hover:scale-110 z-10"
+        title={isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+      >
+        {isFavorite ? '❤️' : '🤍'}
+      </button>
       <img 
         src={image} 
         alt={title} 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 
 interface MenuProps {
   vertical?: boolean;
@@ -6,8 +7,7 @@ interface MenuProps {
 }
 
 const Menu = ({ vertical = false, onClose }: MenuProps) => {
-  // Variable fake para pruebas
-  const user = null;
+  const { user } = useUser();
 
   return (
     <nav>
@@ -70,15 +70,6 @@ const Menu = ({ vertical = false, onClose }: MenuProps) => {
                 className="text-white hover:text-gray-200 font-medium transition-colors"
               >
                 AddBook
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/editbook"
-                onClick={onClose}
-                className="text-white hover:text-gray-200 font-medium transition-colors"
-              >
-                EditBook
               </Link>
             </li>
           </>

@@ -10,7 +10,7 @@ const bookSchema = z.object({
   titulo: z.string().min(1, "El titulo es requerido"),
   autor: z.string().min(1, "El autor es requerido"),
   tipo: z.string().min(1, "El tipo es requerido"),
-  foto: z.string().min(1, "La foto es requerida"),
+  foto: z.string(),
   precio: z.string().min(1, "El precio es requerido")
 });
 
@@ -30,21 +30,36 @@ const AddBook = () => {
         return;
       }
 
+      console.log('Enviando datos:', {
+        id_user: user.id_user,
+        title: data.titulo,
+        type: data.tipo,
+        author: data.autor,
+        price: parseFloat(data.precio),
+        photo: data.foto && data.foto.trim() !== '' ? data.foto : null
+      });
+
       await axios.post('http://localhost:3000/api/books', {
         id_user: user.id_user,
         title: data.titulo,
         type: data.tipo,
         author: data.autor,
         price: parseFloat(data.precio),
-        photo: data.foto
+        photo: data.foto && data.foto.trim() !== '' ? data.foto : null
       });
 
       toast.success('¡Libro añadido exitosamente!');
       reset();
       navigate('/books');
     } catch (error: any) {
-      toast.error('Error al añadir el libro. Intenta de nuevo');
-      console.error('Error adding book:', error);
+      console.error('Error completo:', error);
+      console.error('Respuesta del servidor:', error.response?.data);
+      
+      if (error.response?.data?.error) {
+        toast.error(`Error: ${error.response.data.error}`);
+      } else {
+        toast.error('Error al añadir el libro. Intenta de nuevo');
+      }
     }
   };
 
@@ -100,14 +115,14 @@ const AddBook = () => {
           </div>
 
           <div>
-            <label htmlFor="foto" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="foto" className="block text-gray-700 font-semibold mb-2">
               Foto:
             </label>
             <input
               type="text"
               id="foto"
               {...register("foto")}
-              placeholder="https://photo.jpg"
+              placeholder="https://images-na.ssl-images-amazon.com/images/I/libro.jpg"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 bg-gray-100"
             />
             {errors.foto && <p className="text-red-600 text-sm mt-1">{errors.foto.message}</p>}

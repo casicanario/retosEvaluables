@@ -62,8 +62,10 @@ const Login = () => {
         password: formValues.password
       });
 
-      // Usar la función login del contexto
-      login(response.data);
+      console.log('Datos del usuario recibidos del backend:', response.data);
+      
+      // Usar la función login del contexto - guardar solo el objeto user
+      login(response.data.user);
       
       toast.success('¡Login exitoso! Bienvenido');
       navigate('/books');
