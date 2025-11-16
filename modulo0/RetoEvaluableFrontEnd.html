@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto Evaluable</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: rgb(33, 143, 155);
+            padding: 20px;
+            flex: 1;
+        }
+        
+        header h1 {
+            color: white;
+            font-size: 32px;
+        }
+        
+        header h2 {
+            color: yellow;
+            font-size: 24px;
+        }
+        
+        header h3 {
+            color: lightgreen;
+            font-size: 20px;
+        }
+        
+        .imagen-perfil {
+            float: left;
+            background-color: rgb(33, 143, 155);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-right: 15px;
+        }
+        
+        .Texto {
+            color: white;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .button {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid darkorange;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .footer {
+            background-color: rgb(50, 50, 50);
+            padding: 15px;
+            text-align: center;
+            color: white;
+            margin-top: auto;
+        }
+        
+        .footer a {
+            color: lightblue;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FINN EL HUMANO</h1>
+        <img class="imagen-perfil" src="https://pm1.aminoapps.com/6329/26214ac3b2963262e6756bb7bb59dededb32f6f9_hq.jpg" alt="Finn_the_Human_sprite">
+        <h2>¿Quién soy?</h2>
+        <p class="Texto">Me llamo Finn, y soy un humano que vive en la Tierra de Ooo. Desde pequeño fui abandonado en un bosque, y fue encontrado por una pareja de perros, Joshua y Margaret, quienes me adoptaron y me criaron como parte de su familia. Creí que no tenía padres biológicos, pero más tarde descubrí que tengo un padre llamado Martin y una madre llamada Minerva, aunque no los conocí muy bien.</p>
+        <h3>Hobbies</h3>
+        <p class="Texto">Mis hobbies son tan variados como las criaturas y reinos de la Tierra de Ooo. Mi favorito, sin duda, es aventurarme. No hay nada que me deje más emocionado que salir a explorar el bosque, descubrir cuevas secretas o enfrentarme a misterios que nadie más se atreve a resolver.</p>
+    
+        <button class="button">Pincha!!</button>
+    </header>
+
+    <footer class="footer">
+        <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+        <a href="https://www.twitter.com/" target="_blank">Twitter</a>
+        <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+        <br>
+        © 2025 Fran Márquez
+    </footer>
+
+    <script>
+        // Script para manejar el evento del botón
+        document.querySelector('.button').addEventListener('click', function() {
+            alert('Solo era una prueba, no se envió nada.');
+        });
+    </script>
+</body>
+</html>
