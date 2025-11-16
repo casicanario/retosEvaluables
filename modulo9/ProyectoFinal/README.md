@@ -168,7 +168,6 @@ El chatbot maneja los siguientes errores:
 
 **Estudiante Codenotch**  
 Módulo 9 - Introducción a la Ingeniería de Prompts  
-Fecha: 16 de noviembre de 2025
 
 ## 📄 Licencia
 
