@@ -66,11 +66,7 @@ console.log("Array ordenado:", ordenarArray([...numeros]));
  *   • Aprender nuevas formas de resolver problemas
  *   • Completar código basándose en el contexto
  * 
- * - Escribir manualmente es mejor para:
- *   • Lógica de negocio específica y compleja de tu aplicación
- *   • Casos donde necesitas entender cada línea a profundidad
- *   • Algoritmos personalizados que no siguen patrones estándar
- *   • Cuando estás aprendiendo y necesitas practicar la sintaxis
+
  * 
  * CONCLUSIÓN:
  * Copilot es una herramienta poderosa que aumenta la productividad, pero no reemplaza
