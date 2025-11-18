@@ -117,14 +117,6 @@
             border-radius: 2px;
         }
         
-        .stats-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 10px 0;
-        }
-        
         .hidden {
             display: none !important;
         }
@@ -179,11 +171,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showSection('professionals')">
                             <i class="fas fa-users me-1"></i>Profesionales
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('stats')">
-                            <i class="fas fa-chart-bar me-1"></i>Estadísticas
                         </a>
                     </li>
                 </ul>
@@ -372,67 +359,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Statistics Section -->
-        <div id="statsSection" class="section-container hidden">
-            <h2 class="section-title">
-                <i class="fas fa-chart-bar me-3"></i>Estadísticas del Sistema
-            </h2>
-            
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="stats-card text-center">
-                        <i class="fas fa-film fa-2x mb-2"></i>
-                        <h4 id="totalMovies">0</h4>
-                        <p class="mb-0">Películas Total</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stats-card text-center">
-                        <i class="fas fa-users fa-2x mb-2"></i>
-                        <h4 id="totalProfessionals">0</h4>
-                        <p class="mb-0">Profesionales</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stats-card text-center">
-                        <i class="fas fa-trophy fa-2x mb-2"></i>
-                        <h4 id="totalOscars">0</h4>
-                        <p class="mb-0">Oscars Total</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stats-card text-center">
-                        <i class="fas fa-calendar fa-2x mb-2"></i>
-                        <h4 id="avgYear">2020</h4>
-                        <p class="mb-0">Año Promedio</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5><i class="fas fa-chart-pie me-2"></i>Profesionales por Profesión</h5>
-                        </div>
-                        <div class="card-body" id="professionStats">
-                            <!-- Stats will be displayed here -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5><i class="fas fa-globe me-2"></i>Películas por Nacionalidad</h5>
-                        </div>
-                        <div class="card-body" id="nationalityStats">
-                            <!-- Stats will be displayed here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Scripts -->
@@ -496,11 +422,6 @@
                 link.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Actualizar estadísticas si es la sección de stats
-            if (sectionName === 'stats') {
-                updateStats();
-            }
         }
 
         // Función para actualizar los selectores de profesionales
@@ -647,68 +568,6 @@
                 movies = movies.filter(movie => movie.id !== id);
                 displayMovies();
             }
-        }
-
-        // Función para actualizar estadísticas
-        function updateStats() {
-            document.getElementById('totalMovies').textContent = movies.length;
-            document.getElementById('totalProfessionals').textContent = professionals.length;
-            
-            const totalOscars = professionals.reduce((sum, prof) => sum + prof.oscarsNumber, 0);
-            document.getElementById('totalOscars').textContent = totalOscars;
-            
-            if (movies.length > 0) {
-                const avgYear = Math.round(movies.reduce((sum, movie) => sum + movie.releaseYear, 0) / movies.length);
-                document.getElementById('avgYear').textContent = avgYear;
-            }
-            
-            // Estadísticas por profesión
-            const professionStats = {};
-            professionals.forEach(prof => {
-                professionStats[prof.profession] = (professionStats[prof.profession] || 0) + 1;
-            });
-            
-            let professionHTML = '';
-            Object.keys(professionStats).forEach(profession => {
-                const count = professionStats[profession];
-                const percentage = ((count / professionals.length) * 100).toFixed(1);
-                professionHTML += `
-                    <div class="mb-2">
-                        <div class="d-flex justify-content-between">
-                            <span>${profession}</span>
-                            <span>${count} (${percentage}%)</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-primary" style="width: ${percentage}%"></div>
-                        </div>
-                    </div>
-                `;
-            });
-            document.getElementById('professionStats').innerHTML = professionHTML || '<p class="text-muted">No hay datos disponibles</p>';
-            
-            // Estadísticas por nacionalidad
-            const nationalityStats = {};
-            movies.forEach(movie => {
-                nationalityStats[movie.nationality] = (nationalityStats[movie.nationality] || 0) + 1;
-            });
-            
-            let nationalityHTML = '';
-            Object.keys(nationalityStats).forEach(nationality => {
-                const count = nationalityStats[nationality];
-                const percentage = ((count / movies.length) * 100).toFixed(1);
-                nationalityHTML += `
-                    <div class="mb-2">
-                        <div class="d-flex justify-content-between">
-                            <span>${nationality}</span>
-                            <span>${count} (${percentage}%)</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-success" style="width: ${percentage}%"></div>
-                        </div>
-                    </div>
-                `;
-            });
-            document.getElementById('nationalityStats').innerHTML = nationalityHTML || '<p class="text-muted">No hay datos disponibles</p>';
         }
 
         // Event Listeners
@@ -879,75 +738,6 @@
                 }
             }
         }, 2000);
-
-        // Función para exportar datos
-        function exportData() {
-            const data = {
-                professionals: professionals,
-                movies: movies,
-                exportDate: new Date().toISOString()
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = 'movie_system_data.json';
-            link.click();
-        }
-
-        // Función para importar datos
-        function importData(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const data = JSON.parse(e.target.result);
-                        
-                        if (data.professionals && data.movies) {
-                            professionals = data.professionals;
-                            movies = data.movies;
-                            
-                            displayProfessionals();
-                            displayMovies();
-                            updateProfessionalSelectors();
-                            
-                            showSuccessMessage('Datos importados correctamente');
-                        }
-                    } catch (error) {
-                        alert('Error al importar el archivo. Verifica que sea un archivo JSON válido.');
-                    }
-                };
-                reader.readAsText(file);
-            }
-        }
-
-        // Agregar botones de exportar/importar al navbar
-        $(document).ready(function() {
-            const exportImportHTML = `
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-cog me-1"></i>Opciones
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="exportData()">
-                            <i class="fas fa-download me-2"></i>Exportar Datos
-                        </a></li>
-                        <li><a class="dropdown-item" href="#" onclick="document.getElementById('importFile').click()">
-                            <i class="fas fa-upload me-2"></i>Importar Datos
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#" onclick="loadSampleData()">
-                            <i class="fas fa-database me-2"></i>Cargar Datos de Ejemplo
-                        </a></li>
-                    </ul>
-                </li>
-                <input type="file" id="importFile" accept=".json" style="display: none" onchange="importData(event)">
-            `;
-            $('.navbar-nav').append(exportImportHTML);
-        });
     </script>
 </body>
 </html>
